@@ -1,0 +1,60 @@
+﻿@model IEnumerable<inSpark.Models.Entities.Job>
+@{
+    ViewBag.Title = "Careers";
+}
+
+
+<div class="banner-section">
+    <img id="banner-img" src="~/Content/images/careerbanner.jpg" alt="backgroiund image">
+    <h1>See how far your thinking can go</h1>
+</div>
+<div class="mid-section">
+    <div class="growth-card">
+        <h1>Endless growth opportunities</h1>
+        <p>
+            Our firms culture is rooted in our core
+            principles. Here, you will join diverse and
+            inclusive teams that support each other and
+            empower you to do your best work.
+        </p>
+    </div>
+    <img id="img-glasgow" src="~/Content/images/people-Glasgow.jpg" alt="">
+</div>
+
+
+<h1 class="jobs-header">Open Positions</h1>
+<div id="open-positions">
+    @if (Model != null)
+    {
+        foreach (inSpark.Models.Entities.Job job in Model)
+        {
+            if (job.DeadLine - DateTime.Now.AddDays( 1) > new TimeSpan())
+            {
+                <div id = "job-card" >
+                    <h3>@job.Title</h3>
+                    <p>Application Deadline: @job.DeadLine.ToString("d")</p>
+                    <div class="job-card-footer">
+                        <a id="job-requirement" href="@job.JobRequirementPath" target="_blank">
+                            <i class="fas fa-download"> Job Requirements</i>
+                            
+                        </a>
+                        <div class="apply">
+                             @Html.ActionLink("Apply Now", "Apply", "Jobs", null, null, null, new { jobId = job.Id }, new {@style= "color:#337ab7; font-weight:600" })
+                           
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        }
+    }
+    else
+    {
+        <h1>No Open Positions For now</h1>
+        <a>Join our mailing list</a>
+    }
+
+
+
+</div>
+

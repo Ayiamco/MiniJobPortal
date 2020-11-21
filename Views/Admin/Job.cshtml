@@ -1,0 +1,77 @@
+﻿@model inSpark.Models.Entities.Job
+
+@{
+    ViewBag.Title = "Job";
+}
+
+<h2 class="text-primary text-center" >Job</h2>
+
+<div class="text-center" id="job-details">
+    
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.DeadLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeadLine)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePublished)
+        </dd>
+        <br />
+        <dt>
+            No Of Applicants
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfApplicants)
+        </dd>
+        <br />
+
+        <dt>
+            Mail Salutation
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailSalutation)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.RejectionMailMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RejectionMailMessage)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.AcceptanceMailMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcceptanceMailMessage)
+        </dd>
+        
+    </dl>
+</div>
+<p class="text-center">
+    @Html.ActionLink("Edit Job", "UpdateJob", new { id = Model.Id }) 
+    <br />
+    <a href="@Model.JobRequirementPath" target="_blank">View Job Requirement</a>
+   
+</p>

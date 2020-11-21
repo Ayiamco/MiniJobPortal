@@ -1,0 +1,27 @@
+﻿@model inSpark.Models.ViewModels.JobApplicationStatusViewModel
+@{
+    ViewBag.Title = "ApplicaionStatus";
+    string message;
+    if (@Model.JobApplicationStatus == inSpark.Infrastructure.Services.JobApplicationStatus.ApplicationClosed)
+    {
+        message = "Your Application for the " + Model.JobTitle +" position was not successful because Application has being closed";
+    }
+    else if(@Model.JobApplicationStatus == inSpark.Infrastructure.Services.JobApplicationStatus.Successuful)
+    {
+        message = "Your Application for" + Model.JobTitle + " was  successful.";
+    }
+    else
+    {
+        message = "An Error occured during Your Application for the " + Model.JobTitle + " position";
+    }
+
+}
+
+<div table-fullpage div-padded-50px>
+    <p text-center text-primary >
+        Hi @Model.ApplicantName, <br /> 
+        @message;
+    </p>
+</div>
+
+

@@ -1,0 +1,109 @@
+﻿/* *{
+    border: 1px solid;
+} */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    background-color: #fafafa;
+    align-items: center;
+}
+
+.admin-header-item {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-header-id a {
+    margin-left: 10px;
+}
+
+.admin-main {
+    display: flex;
+}
+
+.admin-section {
+    width: 85%;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+}
+
+
+    .admin-section h2 {
+        display: block;
+        margin-left: 20px;
+        border-bottom: 1px solid;
+        padding-bottom: 20px;
+    }
+
+.admin-aside {
+    width: 15%;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+    .admin-aside div a {
+        display: flex;
+        justify-content: space-between;
+        color: blue;
+        margin: 5px 0px;
+        text-decoration: none;
+    }
+
+        .admin-aside div a:hover {
+            color: rgb(6, 16, 26);
+            
+        }
+
+#admin-aside-title {
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+}
+
+.admin-aside div i, .admin-aside div p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.admin-info {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.admin-info-card {
+    margin: 15px;
+    width: 25%;
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+    height: 80px;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 2px 2px 2px 2px gray;
+}
+
+
+.admin-info-desc {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+}
+
+    .admin-info-desc i {
+        display: block;
+        padding-top: 5px;
+    }
+
+.admin-info p {
+    margin: 5px 0px;
+    color: gray;
+}
+
+#info-card-number {
+    display: block;
+    color: blue;
+}

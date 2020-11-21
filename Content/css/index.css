@@ -1,0 +1,414 @@
+﻿html {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+
+/* *************************Nav bar **************************************/
+header {
+    height: 10vh;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 60px;
+    padding-right: 60px;
+    max-width: 100%;
+}
+
+nav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    nav a:hover {
+        color: blue;
+    }
+
+#logo {
+    max-height: 90%;
+}
+
+#nav-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+    #nav-link a {
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 10%;
+    }
+
+
+/* ************************** Main section******************** */
+.main-hero img {
+    min-height: 80%;
+    max-width: 100%;
+}
+
+.title {
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+    font-size: 3em;
+    color: rgb(61, 61, 224);
+    width: 90%;
+    margin-top: 0px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+}
+
+.btn-blue {
+    color: white;
+    font-family: 'Fira Sans', 'sans-serif';
+    font-size: 23px;
+    cursor: pointer;
+    background-color: rgb(61, 61, 224);
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+.main-bd p {
+    width: 70%;
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+
+/* Services section styles*/
+#services {
+    margin-top: 5%;
+    background-color: #fafafa;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 20px;
+}
+
+.services-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.service {
+    display: inline;
+    width: 30%;
+    margin-bottom: 30px;
+}
+
+    .service img {
+        width: 60px;
+        height: 60px;
+        margin: 0px;
+    }
+
+    .service h2 {
+        margin-top: 4px;
+    }
+
+
+/******************************** Approach styles       ************************ */
+
+#approach-img {
+    width: 30%;
+    height: 40%;
+    margin-right: 30px;
+}
+
+    #approach-img img {
+        max-width: 100%;
+        max-height: 200%;
+    }
+
+#approach-bd {
+    width: 30%;
+    height: 40%;
+    margin-right: 30px;
+}
+
+    #approach-bd h2 {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #approach-bd p {
+        font-size: large;
+    }
+
+/* ************************Why Work With Us section styles */
+
+
+.why-bd {
+    margin-top: 8%;
+    width: 50%;
+}
+
+    .why-bd p {
+        padding-right: 50px;
+        font-size: larger;
+    }
+
+
+
+.contact-info {
+    display: flex;
+    padding: 0px 10px;
+}
+
+    .contact-info p {
+        padding-left: 15px;
+    }
+
+.contact-form h2 {
+    font-size: 30px;
+}
+
+.contact-form {
+    text-align: center;
+    padding: 20px 0px;
+}
+
+    .contact-form input {
+        display: block;
+        margin: auto;
+        padding: 5px 0px;
+    }
+
+
+footer {
+    height: 150px;
+    background-color: rgb(2, 2, 37);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+    footer img {
+        max-width: 35px;
+        max-height: 35px;
+    }
+
+.ft-left {
+    margin-right: 25vw;
+}
+
+    .ft-left a {
+        text-decoration: none;
+        margin-right: 13px;
+        color: white;
+    }
+
+.ft-right {
+    margin-left: 25vw;
+    min-width: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#btn-top {
+    position: fixed;
+    right: 30px;
+    z-index: 3;
+    bottom: 170px;
+    background-color: rgb(2, 2, 37);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: #fafafa;
+    padding: 5px;
+}
+
+.mytool-tip {
+    position: fixed;
+    right: 22px;
+    z-index: 4;
+    bottom: 212px;
+    background-color: rgb(2, 2, 37);
+    border-radius: 5px;
+    color: #fafafa;
+    padding: 2px;
+    font-size: 10px;
+}
+
+    .mytool-tip p {
+        margin: auto;
+    }
+
+#mytool-tip {
+    display: none;
+}
+
+
+
+@media only screen and (min-width:900px) {
+    .nav-icon, #hidden-nav {
+        display: none;
+    }
+
+    #why {
+        background-color: #fafafa;
+        display: flex;
+        padding: 0px 150px;
+        margin-bottom: 20px;
+    }
+
+    .main {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        padding: 0px 60px;
+    }
+
+    .main-bd {
+        width: 50%;
+    }
+
+    .main-hero {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #approach {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 60px;
+        
+    }
+
+    .why-img {
+        width: 50%;
+    }
+
+    .why-img img {
+        width: 100%;
+    }
+
+    #contact, #clients {
+        display: flex;
+        align-items: center;
+        padding: 20px 150px;
+    }
+
+    .clients-img {
+        width: 70%;
+    }
+
+    .clients-bd {
+        width: 30%;
+    }
+
+    .clients-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .contact-form {
+        width: 50%;
+    }
+
+    #contact {
+        background-color: #fafafa;
+    }
+}
+
+@media (max-width:899px) and (min-width:600px) {
+    .nav-icon, #hidden-nav {
+        display: none;
+    }
+
+    .main {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        padding: 0px 60px;
+    }
+
+    .main-bd {
+        width: 50%;
+    }
+
+    .main-hero {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #approach {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #why {
+        background-color: #fafafa;
+        display: flex;
+        margin-bottom: 20px;
+        padding: 0px 30px;
+    }
+
+    .why-bd {
+        width: 70%;
+    }
+
+    .why-img {
+        width: 40%;
+    }
+
+    .why-img img {
+        width: 100%;
+    }
+
+    #contact, #clients {
+        display: flex;
+        align-items: center;
+        padding: 20px 60px;
+    }
+
+    .clients-img {
+        width: 60%;
+    }
+
+    .clients-bd {
+        width: 40%;
+    }
+
+    .clients-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    .contact-form {
+        width: 50%;
+    }
+
+    #contact {
+        background-color: #fafafa;
+    }
+}

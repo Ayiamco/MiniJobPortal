@@ -1,0 +1,65 @@
+﻿@model IPagedList<inSpark.Models.Entities.Job>
+@using PagedList;
+@using PagedList.Mvc; 
+@{
+    ViewBag.Title = "JobList";
+}
+
+<h2 class="text-center">JobList</h2>
+
+<p>
+    <div class="div-padded">
+        <button class="btn-primary"> @Html.ActionLink("Add New Job", "CreateJob", "Admin", null, null, null, new { id = new Guid() }, htmlAttributes: new { id = "btn-addNewJob", @class = "btn-primary" })</button>
+    </div>
+    
+</p>
+<div class="div-padded table-fullpage">
+    <table class="table table-bordered table-striped ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DatePublished)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DeadLine)
+            </th>
+            <th>
+                No of Applicants
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.Title, "Job", "Admin",null,null,null , new { jobId = @item.Id } , null)
+
+
+
+                </td>
+                <td>
+                    @item.DatePublished.ToString("D")
+                </td>
+                <td>
+                     @item.DeadLine.ToString("D")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoOfApplicants)
+                </td>
+                <td>
+                    @Html.ActionLink("View Applicants", "GetApplicants","Admin",null,null,null, new { jobId = item.Id },null)
+                </td>
+                <td>
+                    @Html.ActionLink("End Application", "UpdateJob","Admin", null, null, null, new { id = item.Id, property="DeadLine" },null)
+                </td>
+            </tr>
+        }
+
+    </table>
+@Html.PagedListPager(Model,i=>Url.Action("index","Admin"))
+
+</div>

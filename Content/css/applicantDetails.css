@@ -1,0 +1,48 @@
+﻿#applicant-details-section {
+    margin: 20px;
+}
+
+.applicant-details-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-response a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 0px;
+    color: white;
+    align-items: center;
+    background-color: rgb(12, 12, 90);
+    padding: 5px;
+    margin-right: 10px;
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgb(12, 12, 90);
+    ;
+}
+
+#decline-applicant {
+    background-color: rgb(124, 17, 17);
+    box-shadow: 2px 2px 2px rgb(124, 17, 17);
+}
+
+@media (min-width:500px) and (max-width:900px) {
+
+    .admin-response a {
+        padding: 15px;
+    }
+}
+
+@media (min-width:500px) and (max-width:3550){
+
+    .admin-response a {
+        padding: 20px;
+    }
+
+    #applicant-details-section {
+        display:block;
+        margin: 20px 70px;
+    }
+}

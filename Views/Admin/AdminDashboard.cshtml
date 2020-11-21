@@ -1,0 +1,78 @@
+﻿@model inSpark.Models.ViewModels.AdminDashboardViewModel
+@{
+    ViewBag.Title = "AdminDashboard";
+}
+
+
+<div class="admin-header">
+    <div class="admin-header-item">Recruitment Stats</div>
+    <div class="admin-header-item">@DateTime.Now.ToString("D")</div>
+    <div class="admin-header-item admin-header-id">Welcome, @Model.AdminMail <a href="@Url.Action("LogOff","Account")">Logoff</a></div>
+</div>
+<div class="admin-main">
+    <aside class="admin-aside">
+        <div id="admin-aside-title">Dashboard</div>
+        <br>
+        
+        <div><a href="@Url.Action("GetJobs","Admin")"> <p>Jobs</p> <i class="fas fa-bacon"> </i></a></div>
+        <div> <a href=""><p>Appilicants</p><i class="fas fa-users "></i></a> </i></div>
+        <div><a href=""><p>Applications</p><i class="fas fa-user-clock "></i></a></i></div>
+    </aside>
+    <div class="admin-section">
+        <h2>Admin Dashboard</h2>
+        <div class="admin-info">
+
+
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Jobs </p>
+                    <i class="fas fa-tools fa-2x"></i>
+
+
+                </div>
+
+                <p id="info-card-number">@Model.NoOfJobs</p>
+            </div>
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Users </p>
+                    <i class="fas fa-users fa-2x"></i>
+                </div>
+                <p id="info-card-number">@Model.NoOfApplicants</p>
+            </div>
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Applications</p>
+                    <i class="fas fa-user-clock fa-2x"></i>
+                </div>
+                <p id="info-card-number">@Model.NoOfApplications</p>
+            </div>
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Rejected</p>
+                    <i class="fas fa-times fa-2x"></i>
+                </div>
+
+                <p id="info-card-number">@Model.NoOfRejectedApplications </p>
+            </div>
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Accepted</p>
+                    <i class="fas fa-check fa-2x"></i>
+                </div>
+
+                <p id="info-card-number">@Model.NoOfAcceptedApplications </p>
+            </div>
+            <div class="admin-info-card">
+                <div class="admin-info-desc">
+                    <p>Not Reviewed</p>
+                    <i class="fas fa-cogs fa-2x"></i>
+                </div>
+
+                <p id="info-card-number">@Model.NoOfNotReviewedApplications </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/index.css")
+    @Styles.Render("~/Content/css/indexSmallScreen.css")
+        @Styles.Render("~/Content/css/career.css")
+        @Styles.Render("~/Content/css/careerSmallScreen.css")
+        @Styles.Render("~/Content/css/general.css")
+        @Styles.Render("~/Content/css/applicantDetails.css")
+        @Styles.Render("~/Content/css/JobApplicantsList.css")
+        @Styles.Render("~/Content/css/adminDashboard.css")
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <header id="top">
+        <nav>
+            @*<a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>*@
+            <img id="logo" src="~/Content/images/logo.png" alt="">
+            <div id="nav-link">
+
+                @Html.ActionLink("About Us", "Index", "Home", null, null, "why", null, null)
+                @Html.ActionLink("Services", "Index", "Home", null, null, "services", null, null)
+                @Html.ActionLink("Jobs", "Index", "Jobs")
+                @Html.ActionLink("Contact Us", "Index", "Home", null, null, "contact", null, null)
+            </div>
+            <div class="nav-icon"> <i id="nav-on-switch" class="fas fa-bars fa-2x "></i> <i id="nav-off-switch" class="fas fa-times-circle fa-2x "></i></div>
+
+        </nav>
+        <div id="hidden-nav">
+            <a href="#why">About Us</a>
+            <a href="#services">Services</a>
+            @Html.ActionLink("Careers", "Contact", "Home")
+            <a href="#contact">Contact Us</a>
+        </div>
+    </header>
+    <div class="">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="ft-left">
+                <a href="">Terms & Conditions</a>
+                <a href="">Privacy policy</a>
+            </div>
+            <div class="ft-center"><p>&copy inSpark 2020</p></div>
+            <div class="ft-right">
+                <a href=""><img src="~/Content/images/facebook.svg"></a>
+                <a href=""><img src="~/Content/images/Instagram.svg"></a>
+                <a href=""><img src="~/Content/images/LinkedIn.svg"></a>
+                <a href=""><img src="~/Content/images/Twitter.svg"></a>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

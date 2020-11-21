@@ -1,0 +1,46 @@
+﻿.job-info {
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+    padding-left: 20px;
+    flex-wrap: wrap;
+}
+
+.job-info-card {
+    margin: 5px;
+    width: calc(19% - 30px);
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+    height: 80px;
+    padding-left: 3px;
+    padding-right: 3px;
+    box-shadow: 2px 2px 2px 2px gray;
+}
+
+
+.job-info-desc {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+}
+
+    .job-info-desc i {
+        display: block;
+        padding-top: 5px;
+    }
+
+.job-info p {
+    margin: 5px 0px;
+    color: gray;
+}
+
+#info-card-number {
+    display: block;
+    color: blue;
+}
+
+#filter-section{
+    display:flex;
+    justify-content: space-around;
+    margin-top:20px;
+}
+

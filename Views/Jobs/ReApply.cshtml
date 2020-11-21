@@ -1,0 +1,12 @@
+﻿@model inSpark.Models.ViewModels.ReApplyViewModel
+@{
+    ViewBag.Title = "ReApply";
+}
+
+<h4>Hi @Model.ApplicantName, <br />
+    You already applied for the @Model.JobTitle Job, <br> Do you Want to Update your Application Details?</h4>
+<div>
+    @Html.ActionLink("Yes","UpdateApplication","Jobs", new {applicantId=Model.ApplicantId },null)
+    @Html.ActionLink("No","Index","Home")
+</div>
+
