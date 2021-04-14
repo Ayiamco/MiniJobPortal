@@ -1,24 +1,44 @@
 ﻿@model inSpark.Models.ViewModels.JobFormViewModel
 
 @{
-    ViewBag.Title = "CreateJob";
-    string date = @Model.DeadLine.ToString("d");
-    string btnText = "Create New";
-    
+    ViewBag.Title = "New Job";
+    string date;
+    string btnText;
+
+    try
+    {
+        date = @Model.DeadLine.ToString("d");
+        btnText = "Update";
+    }
+    catch
+    {
+        date = "";
+        btnText = "Create New";
+
+    }
+
+
 }
-@if (Model.Id != new Guid())
-{
-    btnText = "Update";
-}
+
 <h2 class="text-center" style="margin-bottom : 30px">@btnText Job Position</h2>
 
-@using (Html.BeginForm("SaveJob","Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("SaveJob", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <input name="Id" value="@Model.Id" hidden/>
+    @try
+    {
+        <input name="Id" value="@Model.Id" hidden />
+    }
+    catch
+    {
+        <input name="Id" hidden />
+    }
+
+
+    
     <div class="form-group">
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
@@ -31,7 +51,7 @@
         @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
             <input type="datetime" value="@date" name="DeadLine" class="form-control" />
-            @*@Html.EditorFor(model => model.DeadLine.ToString("d"), new { htmlAttributes = new { @class = "form-control" } })*@
+
             @Html.ValidationMessageFor(model => model.DeadLine, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -53,16 +73,25 @@
     <div class="form-group">
         @Html.LabelFor(model => model.AcceptanceMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
-            <textarea style="resize:none" class="form-control input-lg" rows="5" name="AcceptanceMailMessage" required>@Model.AcceptanceMailMessage</textarea>
-            @*@Html.TextBoxFor(model => model.AcceptanceMailMessage, new { htmlAttributes = new { @class = "form-control" } })*@
+            <textarea style="resize:none" class="form-control input-lg" rows="5" name="AcceptanceMailMessage" required>
+            @try{
+                @Model.AcceptanceMailMessage
+            }
+            catch { }
+            </textarea>
+
             @Html.ValidationMessageFor(model => model.AcceptanceMailMessage, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.RejectionMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
-            <textarea style="resize:none" class="form-control input-lg" rows="5" name="RejectionMailMessage"  required>@Model.RejectionMailMessage</textarea>
-           @* @Html.TextBoxFor(model => model.RejectionMailMessage, new { htmlAttributes = new { @class = "form-control input-lg" } })*@
+            <textarea style="resize:none" class="form-control input-lg" rows="5" name="RejectionMailMessage" required>
+                @try
+                {@Model.RejectionMailMessage}
+                catch { }
+            </textarea>
+
             @Html.ValidationMessageFor(model => model.RejectionMailMessage, "", new { @class = "text-danger" })
         </div>
     </div>

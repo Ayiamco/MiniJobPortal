@@ -9,42 +9,42 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/css/index.css")
     @Styles.Render("~/Content/css/indexSmallScreen.css")
-        @Styles.Render("~/Content/css/career.css")
-        @Styles.Render("~/Content/css/careerSmallScreen.css")
-        @Styles.Render("~/Content/css/general.css")
-        @Styles.Render("~/Content/css/applicantDetails.css")
-        @Styles.Render("~/Content/css/JobApplicantsList.css")
-        @Styles.Render("~/Content/css/adminDashboard.css")
-
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/css/career.css")
+    @Styles.Render("~/Content/css/careerSmallScreen.css")
+    @Styles.Render("~/Content/css/general.css")
+    @Styles.Render("~/Content/css/applicantDetails.css")
+    @Styles.Render("~/Content/css/JobApplicantsList.css")
+    @Styles.Render("~/Content/css/adminDashboard.css")
     <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="~/Content/js/index.js" defer></script>
 
 </head>
 <body>
-    <header id="top">
-        <nav>
-            @*<a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>*@
-            <img id="logo" src="~/Content/images/logo.png" alt="">
-            <div id="nav-link">
-
-                @Html.ActionLink("About Us", "Index", "Home", null, null, "why", null, null)
-                @Html.ActionLink("Services", "Index", "Home", null, null, "services", null, null)
-                @Html.ActionLink("Jobs", "Index", "Jobs")
-                @Html.ActionLink("Contact Us", "Index", "Home", null, null, "contact", null, null)
+    <div class="pg-container">
+        
+        <header id="top">
+            <div id="mobile-nav">
+                <figure class="logo-container">
+                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                    @*<img id="logo" src="./images/logo.png" alt="">*@
+                </figure>
+                <i id="show-nav" class="fas fa-bars  "></i>
+                <i id="hide-nav" class="fas fa-times-circle  "></i>
             </div>
-            <div class="nav-icon"> <i id="nav-on-switch" class="fas fa-bars fa-2x "></i> <i id="nav-off-switch" class="fas fa-times-circle fa-2x "></i></div>
+            <nav>
+                <a href="#why" class="nav-link">About Us</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#approach" class="nav-link">Our Approach</a>
+                <a href="#contact" class="nav-link">Contact Us</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+            </nav>
 
-        </nav>
-        <div id="hidden-nav">
-            <a href="#why">About Us</a>
-            <a href="#services">Services</a>
-            @Html.ActionLink("Careers", "Contact", "Home")
-            <a href="#contact">Contact Us</a>
-        </div>
-    </header>
-    <div class="">
+        </header>
+     
         @RenderBody()
-        <hr />
+
         <footer>
             <div class="ft-left">
                 <a href="">Terms & Conditions</a>
@@ -58,10 +58,11 @@
                 <a href=""><img src="~/Content/images/Twitter.svg"></a>
             </div>
         </footer>
+        
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

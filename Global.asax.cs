@@ -13,6 +13,7 @@ namespace inSpark
     {
         protected void Application_Start()
         {
+            
             Mapper.Initialize(x=> x.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

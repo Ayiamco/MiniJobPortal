@@ -60,7 +60,7 @@ namespace inSpark.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Application> Applications { get; set; }
 

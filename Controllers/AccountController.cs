@@ -88,10 +88,10 @@ namespace inSpark.Controllers
             var user = _dbContext.GetApplicantDetails(model.Email);
 
             //check if user email is  confirmed
-            if (!user.EmailConfirmed)
-            {
-                //return View("DisplayEmail");
-            }
+            //if (!user.EmailConfirmed)
+            //{
+            //    //return View("DisplayEmail");
+            //}
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -219,18 +219,18 @@ namespace inSpark.Controllers
                 
                 if (result.Succeeded)
                 {
-                    //Generate Email verification code
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action(
-                       "ConfirmEmail", "Account",
-                       new { userId = user.Id,  code },
-                       protocol: Request.Url.Scheme);
+                    ////Generate Email verification code
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action(
+                    //   "ConfirmEmail", "Account",
+                    //   new { userId = user.Id,  code },
+                    //   protocol: Request.Url.Scheme);
 
-                    //send verification mail to new user
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account",
-                       "Please confirm your account by clicking this link: <a href=\""
-                                                       + callbackUrl + "\">link</a>");
+                    ////send verification mail to new user
+                    //await UserManager.SendEmailAsync(user.Id,
+                    //   "Confirm your account",
+                    //   "Please confirm your account by clicking this link: <a href=\""
+                    //                                   + callbackUrl + "\">link</a>");
                     //add new user to correct role 
                     await UserManager.AddToRoleAsync(user.Id, UserRoles.CanApplyForJobs);
 
@@ -241,7 +241,7 @@ namespace inSpark.Controllers
                     //return RedirectToAction("Index", "Home");
 
                     //return user to confirm email page 
-                    return View("DisplayEmail");
+                    return View("Login");
 
                 }
                 AddErrors(result);

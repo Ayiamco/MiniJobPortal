@@ -29,12 +29,12 @@ namespace inSpark.Models.ViewModels
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Job Title")]
+        [Display(Name = "Job Title *")]
         public string Title { get; set; }
 
         [Required]
         [MustBeFutureDate]
-        [Display(Name = "Application DeadLine (mm/dd/yyyy)")]
+        [Display(Name = "Application DeadLine (mm/dd/yyyy) *")]
         public DateTime DeadLine { get; set; }
 
         //[Required]

@@ -20,8 +20,8 @@ namespace inSpark.Infrastructure.Services
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = new System.Net.NetworkCredential()
                 {
-                    UserName = " sender email address ",
-                    Password = "sender email password"
+                    UserName = "ayiamco@gmail.com",
+                    Password = "chukwuyerechukwuyere"
                 };
                 smtpClient.EnableSsl = true;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -30,7 +30,7 @@ namespace inSpark.Infrastructure.Services
                 {
                     To = { recieverEmail },
                     Body = messageBody,
-                    From = new MailAddress(" sender email address "),
+                    From = new MailAddress( "ayiamco@gmail.com"),
                     Subject = messageSubject
                 };
 
@@ -49,7 +49,7 @@ namespace inSpark.Infrastructure.Services
             IdentityMessage mail=new IdentityMessage()
             {
                 Body = messageBody,
-                Destination = "admin email address",
+                Destination = "ayiamco@gmail.com",
                 Subject = "Job Application"
             };
             EmailService emailService = new EmailService();
@@ -71,7 +71,7 @@ namespace inSpark.Infrastructure.Services
             IdentityMessage mail = new IdentityMessage()
             {
                 Body = message,
-                Destination = "admin email address",
+                Destination =applicant.Email,
                 Subject = "New Job Application"
             };
             EmailService emailService = new EmailService();

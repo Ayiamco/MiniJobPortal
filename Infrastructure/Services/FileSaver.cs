@@ -37,6 +37,21 @@ namespace inSpark.Infrastructure.Services
             return storagePath;
         }
 
+        //function to convert byte to imgURl
+        public string ImageConvertToString(byte[] bytes)
+        {
+            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            return "data:image/png;base64," + base64String;
+        }
+
+        //function to convert file to byte
+        public  byte[] ImageConvertToByte(HttpPostedFileBase file)
+        {
+            Stream fs = file.InputStream;
+            BinaryReader br = new BinaryReader(fs);
+            return  br.ReadBytes((Int32)fs.Length);
+        }
+
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);

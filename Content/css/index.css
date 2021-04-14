@@ -1,414 +1,574 @@
-﻿html {
+﻿/* global styles and variables */
+:root {
+    --blue-1: #234095;
+    --gray-1: #fafafa;
+    --gray-2: #d3d4d9;
+    --blue-2: rgb(2, 2, 37);
+}
+
+html {
     scroll-behavior: smooth;
 }
 
-body {
-    padding: 0px;
-    margin: 0px;
+* {
+    padding: 0em;
+    margin: 0em;
+    box-sizing: border-box;
 }
 
-
-
-
-/* *************************Nav bar **************************************/
-header {
-    height: 10vh;
-    padding: 0px;
-    margin: 0px;
-    padding-left: 60px;
-    padding-right: 60px;
-    max-width: 100%;
+h1 {
+    font-family: "fira sans";
 }
 
-nav {
-    height: 100%;
+h2 {
+    font-family: "fira sans";
+    color: var(--blue-1);
+    font-size: 2em;
+    text-align: center;
+}
+
+img {
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes showItem {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* nav header styles */
+#top {
+    background-color: white;
+    padding: 0px 1em;
+}
+
+header i {
+    border: 0.5px solid black;
+    padding: 0.5em;
+    color: var(--gray-2);
+}
+
+#mobile-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1em 0px;
 }
 
-    nav a:hover {
-        color: blue;
+.logo-container {
+    width: 40%;
+    height: 3em;
+}
+
+    .logo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
-#logo {
-    max-height: 90%;
-}
-
-#nav-link {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 50%;
-}
-
-    #nav-link a {
-        text-decoration: none;
-        font-size: 20px;
-        margin-left: 10%;
-    }
-
-
-/* ************************** Main section******************** */
-.main-hero img {
-    min-height: 80%;
-    max-width: 100%;
-}
-
-.title {
-    font-family: 'Fira Sans', 'sans-serif', monospace;
-    font-size: 3em;
-    color: rgb(61, 61, 224);
-    width: 90%;
-    margin-top: 0px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    word-spacing: 1px;
-}
-
-.btn-blue {
-    color: white;
-    font-family: 'Fira Sans', 'sans-serif';
-    font-size: 23px;
-    cursor: pointer;
-    background-color: rgb(61, 61, 224);
-    padding: 10px;
-    border-radius: 4px;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-
-
-.main-bd p {
-    width: 70%;
-    display: block;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-}
-
-
-/* Services section styles*/
-#services {
-    margin-top: 5%;
-    background-color: #fafafa;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 20px;
-}
-
-.services-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.service {
-    display: inline;
-    width: 30%;
-    margin-bottom: 30px;
-}
-
-    .service img {
-        width: 60px;
-        height: 60px;
-        margin: 0px;
-    }
-
-    .service h2 {
-        margin-top: 4px;
-    }
-
-
-/******************************** Approach styles       ************************ */
-
-#approach-img {
-    width: 30%;
-    height: 40%;
-    margin-right: 30px;
-}
-
-    #approach-img img {
-        max-width: 100%;
-        max-height: 200%;
-    }
-
-#approach-bd {
-    width: 30%;
-    height: 40%;
-    margin-right: 30px;
-}
-
-    #approach-bd h2 {
-        margin: 0px;
-        padding: 0px;
-    }
-
-    #approach-bd p {
-        font-size: large;
-    }
-
-/* ************************Why Work With Us section styles */
-
-
-.why-bd {
-    margin-top: 8%;
-    width: 50%;
-}
-
-    .why-bd p {
-        padding-right: 50px;
-        font-size: larger;
-    }
-
-
-
-.contact-info {
-    display: flex;
-    padding: 0px 10px;
-}
-
-    .contact-info p {
-        padding-left: 15px;
-    }
-
-.contact-form h2 {
-    font-size: 30px;
-}
-
-.contact-form {
-    text-align: center;
-    padding: 20px 0px;
-}
-
-    .contact-form input {
-        display: block;
-        margin: auto;
-        padding: 5px 0px;
-    }
-
-
-footer {
-    height: 150px;
-    background-color: rgb(2, 2, 37);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
-    footer img {
-        max-width: 35px;
-        max-height: 35px;
-    }
-
-.ft-left {
-    margin-right: 25vw;
-}
-
-    .ft-left a {
-        text-decoration: none;
-        margin-right: 13px;
-        color: white;
-    }
-
-.ft-right {
-    margin-left: 25vw;
-    min-width: 150px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#btn-top {
-    position: fixed;
-    right: 30px;
-    z-index: 3;
-    bottom: 170px;
-    background-color: rgb(2, 2, 37);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    color: #fafafa;
-    padding: 5px;
-}
-
-.mytool-tip {
-    position: fixed;
-    right: 22px;
-    z-index: 4;
-    bottom: 212px;
-    background-color: rgb(2, 2, 37);
-    border-radius: 5px;
-    color: #fafafa;
-    padding: 2px;
-    font-size: 10px;
-}
-
-    .mytool-tip p {
-        margin: auto;
-    }
-
-#mytool-tip {
+nav,
+#hide-nav {
     display: none;
 }
 
+nav {
+    background-color: white;
+}
 
-
-@media only screen and (min-width:900px) {
-    .nav-icon, #hidden-nav {
-        display: none;
+    nav a {
+        display: block;
+        padding-bottom: 0.5em;
+        text-decoration: none;
+        text-align: center;
+        margin: 0.5em 20vw;
     }
 
-    #why {
-        background-color: #fafafa;
+        nav a:hover {
+            border-bottom: 1px solid var(--gray-2);
+        }
+
+/* main section styles */
+#main {
+    padding: 1px 1em;
+}
+
+    #main figure {
+        width: 80%;
+        height: 30vh;
+        margin: auto;
+    }
+
+    #main h1 {
+        color: var(--blue-1);
+        font-size: 3em;
+        margin-bottom: 0.5em;
+    }
+
+.btn-blue {
+    background-color: var(--blue-1);
+    font-size: 1.5em;
+    color: white;
+    display: inline-block;
+    margin: 1em 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-blue span {
+        background-image: linear-gradient( to right, var(--blue-2) 50%, transparent 50% );
+        background-position: 100%;
+        background-size: 200%;
+        transition-duration: 500ms;
+        transition-property: "background";
+        width: 100%;
+        height: 100%;
+        display: block;
+        padding: 0.5em 1em;
+        border-radius: 7px;
+    }
+
+        .btn-blue span:hover {
+            background-position: 0% 100%;
+        }
+
+/* services section styles */
+#services {
+    background-color: var(--gray-1);
+    padding: 1em;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.service {
+    margin: 0.7em 0px;
+}
+
+#services figure {
+    width: 15vw;
+    height: 15vw;
+    margin: auto;
+}
+
+.fall-in {
+    position: relative;
+    left: -100%;
+    animation: slideInLeft 1.5s 50ms forwards ease-in-out;
+}
+
+/* approach section styles */
+#approach {
+    margin: 1em 0px;
+    padding: 1em;
+}
+
+    #approach figure {
+        width: 60%;
+        height: 60%;
+        margin: auto;
+    }
+
+.show-approach {
+    position: relative;
+    right: -100%;
+    animation: slideInRight 2s 500ms forwards ease-in-out;
+}
+/* why section styles */
+#why {
+    padding: 1em;
+    text-align: center;
+    margin: 1em 0px;
+    background-color: var(--gray-1);
+}
+
+    #why h2 {
+        color: var(--blue-1);
+        margin: 0.5em 0px;
+        font-size: 2em;
+    }
+
+.why-p2 {
+    margin-bottom: 1em;
+}
+
+#why figure {
+    width: 90%;
+    margin: auto;
+}
+
+/* clients section styles */
+#clients {
+    padding: 2em;
+    margin: 1em 0px;
+    text-align: center;
+}
+
+/* contact section styles */
+#contact {
+    margin-top: 1.5em;
+    padding: 1em;
+    background-color: var(--gray-1);
+}
+
+    #contact h2 {
+        color: var(--blue-2);
+        font-size: 1.1em;
+        margin-bottom: 1em;
+    }
+
+.contact-form form {
+    background-color: white;
+    margin: 0.5em;
+    padding: 3em 0.8em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 5px 7px gray;
+}
+
+.contact-form input,
+.contact-form textarea {
+    display: block;
+    background-color: var(--gray-2);
+    margin-bottom: 0.5em;
+    padding: 0.5em 0.5em;
+    width: 100%;
+    font-family: "pri";
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-form input {
+    height: 3em;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 8em;
+}
+
+.contact-form button {
+    background-color: var(--blue-1);
+    padding: 0.8em 1em;
+    width: 6em;
+    color: var(--gray-1);
+    border: none;
+    border-radius: 4px;
+    margin: auto;
+    margin-top: 1em;
+}
+
+.contact-info-container {
+    margin: 1.5em 0px;
+    padding: 1em;
+}
+
+    .contact-info-container figure {
         display: flex;
-        padding: 0px 150px;
-        margin-bottom: 20px;
+        align-items: center;
+        margin-bottom: 0.5em;
     }
 
-    .main {
+        .contact-info-container figure > div {
+            width: 20%;
+            height: 2em;
+        }
+
+        .contact-info-container figure > figcaption {
+            width: 80%;
+        }
+/* footer styles */
+footer {
+    background-color: var(--blue-2);
+    padding: 2em 1em;
+    text-align: center;
+}
+
+    footer a {
+        color: white;
+        text-decoration: none;
+        height: 5em;
+        display: flex;
+        flex-direction: columns;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer img {
+        width: 2em;
+        height: 2em;
+        margin: 0.5em;
+    }
+
+.ft-center {
+    color: white;
+}
+
+.ft-right {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ft-left a {
+    margin: 0px 0.5em;
+}
+
+.ft-left {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-top i {
+    background-color: var(--blue-2);
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    display: inline;
+    text-align: center;
+    padding: 0.2em;
+    font-size: 1.5em;
+    color: white;
+    position: fixed;
+    right: 1em;
+    bottom: 12em;
+}
+
+@media only screen and (min-width: 500px) {
+    /* nav bar styles */
+    .logo-container {
+        width: 20%;
+    }
+
+    /* main section styles */
+    #main {
+        padding: 1em 3em;
+    }
+
+        #main figure {
+            width: 90%;
+            height: auto;
+        }
+
+    /* services section styles */
+    #services figure {
+        width: 3em;
+        height: 3em;
+    }
+
+    .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .service {
+        width: 40vw;
+        margin: 0.5em;
+    }
+
+        .service p {
+            text-align: left;
+        }
+
+    /* approach,clients and why section styles */
+    #approach,
+    #why,
+    #clients {
+        text-align: left;
+        padding: 1em 3em;
         display: flex;
         justify-content: space-between;
-        margin-top: 50px;
-        padding: 0px 60px;
+        align-items: center;
+        margin: auto;
     }
 
-    .main-bd {
-        width: 50%;
-    }
+        #approach h2,
+        #why h2,
+        #clients h2 {
+            text-align: left;
+            margin-bottom: 0.5em;
+        }
 
-    .main-hero {
-        width: 50%;
-        display: flex;
-        justify-content: flex-end;
-    }
+        #approach figure,
+        #why figure,
+        #clients figure,
+        #approach-bd,
+        #why aside,
+        #clients aside {
+            width: 45%;
+        }
 
-    #approach {
+        #approach p,
+        #why p,
+        #clients p {
+            font-size: 1em;
+            margin-top: 0px;
+        }
+
+    #clients {
+        flex-direction: row-reverse;
+    }
+    /* contact seccton  styles */
+    #contact {
+        padding: 2em 3em;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 20px 60px;
-        
+        justify-content: space-between;
     }
 
-    .why-img {
-        width: 50%;
-    }
+        #contact h2 {
+            font-size: 1.5em;
+        }
 
-    .why-img img {
-        width: 100%;
-    }
-
-    #contact, #clients {
-        display: flex;
-        align-items: center;
-        padding: 20px 150px;
-    }
-
-    .clients-img {
+    .contact-form {
         width: 70%;
     }
 
-    .clients-bd {
+        .contact-form form {
+            border-radius: 15px;
+        }
+
+    .contact-info-container {
+        width: 25%;
+    }
+
+        .contact-info-container p {
+            font-size: 0.5em;
+        }
+
+    /* footer styles */
+    footer {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1em 3em;
+    }
+
+        footer img {
+            margin: 0.3em;
+        }
+}
+
+@media only screen and (min-width: 900px) {
+    /* nav bar styles */
+    #top {
+        padding: 0px 4rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #mobile-nav {
         width: 30%;
+        height: 5em;
     }
 
-    .clients-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        #mobile-nav i {
+            display: none;
+        }
+
+        #mobile-nav figure {
+            width: 50%;
+        }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+        height: 5em;
     }
 
-    .contact-form {
-        width: 50%;
+        nav a {
+            margin: 0.5em;
+            padding: 0.5em 1em;
+            color: var(--blue-1);
+        }
+
+            nav a:hover {
+                background-color: var(--gray-1);
+                border-bottom: 1px solid var(--blue-2);
+            }
+    /* main section styles*/
+    #main {
+        padding: 0em 4em;
+        display: flex;
+        margin-top: 3em;
     }
 
-    #contact {
-        background-color: #fafafa;
+        #main aside {
+            width: 40%;
+        }
+
+        #main figure {
+            width: 50%;
+        }
+    /* services section styles */
+    #services {
+        padding: 2em 4em;
+    }
+
+        #services h2 {
+            margin-bottom: 1.5em;
+        }
+
+    .service {
+        width: 30%;
+        text-align: left;
+        margin-bottom: 2em;
+        padding: 2em;
+    }
+
+    #services figure {
+        margin: 0px;
+        width: 5em;
+        margin-bottom: 1em;
+    }
+
+    #services img {
+        margin: 0px;
+        margin-left: -1em;
+    }
+
+    /* approach,why and clients section styles */
+    #approach,
+    #why,
+    #clients {
+        padding: 2em 10em;
+    }
+
+        #approach-bd p,
+        #why aside > p,
+        #clients p {
+            font-size: 1em;
+        }
+
+    #why {
+        background-color: var(--gray-1);
+    }
+
+    #clients {
+        background-color: white;
     }
 }
 
-@media (max-width:899px) and (min-width:600px) {
-    .nav-icon, #hidden-nav {
-        display: none;
-    }
-
-    .main {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 50px;
-        padding: 0px 60px;
-    }
-
-    .main-bd {
-        width: 50%;
-    }
-
-    .main-hero {
-        width: 50%;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    #approach {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 70vh;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    #why {
-        background-color: #fafafa;
-        display: flex;
-        margin-bottom: 20px;
-        padding: 0px 30px;
-    }
-
-    .why-bd {
-        width: 70%;
-    }
-
-    .why-img {
+@media only screen and (min-width: 1100px) {
+    #mobile-nav figure {
         width: 40%;
     }
 
-    .why-img img {
-        width: 100%;
-    }
-
-    #contact, #clients {
-        display: flex;
-        align-items: center;
-        padding: 20px 60px;
-    }
-
-    .clients-img {
-        width: 60%;
-    }
-
-    .clients-bd {
-        width: 40%;
-    }
-
-    .clients-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-
-    .contact-form {
-        width: 50%;
-    }
-
+    #why,
+    #approach,
+    #clients,
     #contact {
-        background-color: #fafafa;
+        padding: 2em 15em;
     }
 }

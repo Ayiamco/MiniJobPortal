@@ -2,10 +2,11 @@
 @{
     ViewBag.Title = "inSpark";
 }
-<body>
-    <section class="main">
-        <div class="main-bd">
-            <h1 class="title">We spark up <br> your business...</h1>
+
+    <!-- main section  -->
+    <section id="main">
+        <aside class="main-bd">
+            <h1 class="main-title">We spark up <br> your business...</h1>
             <p>
                 Inspark Enterprise is a full-service
                 digital agency specializing in digital
@@ -13,23 +14,24 @@
                 application design & development,
                 and digital marketing.
             </p>
-            <span class="btn-blue">Request a Quote</span>
-        </div>
-        <div class="main-hero">
-
+            <span class="btn-blue"><span>Request a Quote</span></span>
+        </aside>
+        <figure class="main-hero">
             <img src="~/Content/images/illustration-hero.svg" alt="">
-        </div>
+        </figure>
     </section>
 
+    <!-- services section -->
     <section id="services">
-
-        <h1 class="title">Our Services</h1>
+        <h2 class="title">Our Services</h2>
         <div class="services-container">
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Corporate Branding
-                </h2>
+                </h3>
                 <p>
                     We’ll discover, define, and direct your brand
                     communications to capture and captivate your audience across digital,
@@ -37,10 +39,12 @@
                 </p>
             </div>
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Graphics Design
-                </h2>
+                </h3>
                 <p>
                     We integrate our creativity, expertise and your idea,
                     to bring results that speak of brand consistency,
@@ -49,22 +53,25 @@
                 </p>
             </div>
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Web Development
-                </h2>
+                </h3>
                 <p>
-
                     We design and build websites to impact sales,
                     influence advocacy, and increase lead generation.
                     Our team of designers is skilled at creating landing
                 </p>
             </div>
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Mobile App Development
-                </h2>
+                </h3>
                 <p>
 
                     We work to deliver solutions for an array of business needs,
@@ -73,35 +80,37 @@
                 </p>
             </div>
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Social Media Management
-                </h2>
+                </h3>
                 <p>
                     We make brands more likable and profitable via social media.
                     Instills the same vibe and personality people experience at your company across the
                 </p>
             </div>
             <div class="service">
-                <img src="~/Content/images/home.svg" alt="">
-                <h2>
+                <figure>
+                    <img src="~/Content/images/home.svg" alt="">
+                </figure>
+                <h3>
                     Custom Software Development
-                </h2>
+                </h3>
                 <p>
                     We thrive at helping companies prioritize the most
                     pressing problems to work on and then build custom software to support them.
                 </p>
             </div>
-
         </div>
-
     </section>
 
-    <section id="approach">
-        <div id="approach-img">
+    <!--approach section  -->
+    <section id="approach" class="">
+        <figure id="approach-img">
             <img src="~/Content/images/approach.jpg" alt="">
-
-        </div>
+        </figure>
         <div id="approach-bd">
             <h2 class="title">Our Approach</h2>
             <p>
@@ -109,79 +118,77 @@
                 developers, marketers, and strategists.
                 Our drive is to help you do better business through the right digital medium.
             </p>
-
         </div>
     </section>
 
+    <!--  -->
     <section id="why">
-        <div class="why-bd">
-            <h1 class="title">Why Work With Us?</h1>
+        <aside class="why-bd">
+            <h2>Why Work With Us?</h2>
             <p>
                 We’re a business full of creative, talented individuals who work together
                 as a team to create innovative and engaging interactive experiences.
-            </p><p>
+            </p><p class="why-p2">
                 To build a society where businesses and organizations will utilize tech to provide solutions to their everyday needs.
             </p>
-        </div>
-        <div class="why-img">
+        </aside>
+        <figure class="why-img">
             <img src="~/Content/images/why.svg" alt="">
-
-        </div>
-
+        </figure>
     </section>
-    <div id="clients">
-        <div class="clients-img">
-            <img src="~/Content/images/clients.svg" alt="">
-        </div>
-        <div class="clients-bd">
-            <h2 class="title">
+
+    <!--  -->
+    <section id="clients">
+        <aside class="clients-bd">
+            <h2>
                 Our Past Clients Can Speak For Us
             </h2>
             <p>
-
                 We bring a human touch to your solution, whether,
                 digital marketing, web development, custom software development,
                 no matter what technology you need.
             </p>
-        </div>
-    </div>
-    <div id="contact">
-        <div class="contact-form">
-            <h2 class="title">We love to hear from you</h2>
-            <form action="">
-                <input type="text" placeholder="Enter Fullname">
-                <input type="email" placeholder="Enter Email Address">
-                <input type="text" placeholder="Enter Message">
-                <input type="submit">
+        </aside>
+        <figure>
+            <img src="~/Content/images/clients.svg" alt="">
+        </figure>
+    </section>
 
+    <!--  -->
+    <section id="contact">
+        <div class="contact-form">
+            <form action="">
+                <h2>We love to hear from you</h2>
+                <input type="text" placeholder="Fullname">
+                <input type="text" placeholder="Phone Number">
+                <input type="email" placeholder="Enter Email Address">
+                <textarea placeholder="Message"></textarea>
+                <button type="submit">Send</button>
             </form>
         </div>
         <div class="contact-info-container">
-            <div class="contact-info">
-                <img src="~/Content/images/location.svg" alt="">
-                <p> KM 7 Port Harcourt - Enugu Expressway, Ugwuaji, Enugu</p>
-            </div>
-            <div class="contact-info">
-                <img src="~/Content/images/time.svg" alt="">
-                <p> Weekdays (Mon - Fri): 8am - 5pm</p>
-            </div>
-            <div class="contact-info">
-                <img src="~/Content/images/phone.svg" alt="">
-                <p> (+234)-701-000-1111</p>
-            </div>
-
+            <figure>
+                <div>
+                    <img src="~/Content/images/location.svg" alt="" id="img-special">
+                </div>
+                <figcaption> KM 7 Port Harcourt - Enugu Expressway, Ugwuaji, Enugu</figcaption>
+            </figure>
+            <figure>
+                <div>
+                    <img src="~/Content/images/time.svg" alt="">
+                </div>
+                <figcaption> Weekdays (Mon - Fri): 8am - 5pm</figcaption>
+            </figure>
+            <figure>
+                <div>
+                    <img src="~/Content/images/phone.svg" alt="">
+                </div>
+                <figcaption> (+234)-701-000-1111</figcaption>
+            </figure>
         </div>
-
-    </div>
-
-
-    <a href="#top" id="btn-top"> <i class="fas fa-chevron-up fa-2x"></i></a>
-    <div class="mytool-tip" id="mytool-tip">
-        <p >Back to top</p>
-    </div>
+    </section>
 
 
-</body>
 
 @section scripts {
     <script type="text/javascript" src="~/Content/js/index.js">

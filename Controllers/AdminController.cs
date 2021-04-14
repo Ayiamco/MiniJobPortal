@@ -62,16 +62,11 @@ namespace inSpark.Controllers
 
 
         //GET: /Admin/CreateJob
-        public ActionResult CreateJob(JobFormViewModel model=null,Guid id =new Guid())
+        public ActionResult CreateJob(JobFormViewModel model=null)
         {
             
-            if (model == null && id==new Guid())
+            if (model.JobRequirement == null)
                 return View("JobForm");
-            else if(id !=new Guid())
-            {
-                model= Mapper.Map<Job,JobFormViewModel>(_jobDbContext.ReadItem(id));
-                return View("JobForm", model);
-            }
             
             return View("JobForm",model);
         }
@@ -198,7 +193,8 @@ namespace inSpark.Controllers
             else
             {
                 //Admin wants to update job details
-                return RedirectToAction("CreateJob", new { id });
+                JobFormViewModel model = Mapper.Map<Job, JobFormViewModel>(_jobDbContext.ReadItem(id));
+                return RedirectToAction("CreateJob", new { model });
             }
            
         }

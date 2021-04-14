@@ -20,7 +20,7 @@ namespace inSpark
     {
         public async  Task SendAsync(IdentityMessage message)
         {
-            await MailService.SendMail(message.Destination,message.Body,message.Subject);
+           await MailService.SendMail(message.Destination,message.Body,message.Subject);
            return ;  
         }
     }

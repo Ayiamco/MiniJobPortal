@@ -147,6 +147,7 @@
             </summary>
             <param name="sourceType">Source type</param>
             <param name="destinationType">Destination type</param>
+            <param name="profileName">Profile name, defaults to the default profile</param>
             <returns>Type map configuration</returns>
         </member>
         <member name="E:AutoMapper.IConfigurationProvider.TypeMapCreated">
@@ -1195,12 +1196,6 @@
             Allow null destination collections. If true, null source collections result in null destination collections. Default false.
             </summary>
         </member>
-        <member name="M:AutoMapper.IProfileExpression.IncludeSourceExtensionMethods(System.Reflection.Assembly)">
-            <summary>
-            Include an assembly to search for extension methods to match
-            </summary>
-            <param name="assembly">Assembly containing extension methods</param>
-        </member>
         <member name="P:AutoMapper.IProfileExpression.SourceMemberNamingConvention">
             <summary>
             Naming convention for source members
@@ -1209,18 +1204,6 @@
         <member name="P:AutoMapper.IProfileExpression.DestinationMemberNamingConvention">
             <summary>
             Naming convention for destination members
-            </summary>
-        </member>
-        <member name="P:AutoMapper.IProfileExpression.ShouldMapProperty">
-            <summary>
-            Specify which properties should be mapped.
-            By default only public properties are mapped.
-            </summary>
-        </member>
-        <member name="P:AutoMapper.IProfileExpression.ShouldMapField">
-            <summary>
-            Specify which fields should be mapped.
-            By default only public fields are mapped.
             </summary>
         </member>
         <member name="M:AutoMapper.IProfileExpression.ForAllMaps(System.Action{AutoMapper.TypeMap,AutoMapper.IMappingExpression})">

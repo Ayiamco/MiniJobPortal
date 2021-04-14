@@ -9,6 +9,7 @@ namespace inSpark
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }
