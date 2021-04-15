@@ -220,6 +220,11 @@
     <Compile Include="Dtos\AdminViewModels.cs" />
     <Compile Include="Dtos\ManageViewModels.cs" />
     <Compile Include="Dtos\JobViewModels.cs" />
+    <Compile Include="Migrations\202104150842466_initial-migration.cs" />
+    <Compile Include="Migrations\202104150842466_initial-migration.Designer.cs">
+      <DependentUpon>202104150842466_initial-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ApplicationsRepository.cs" />
     <Compile Include="Interfaces\IApplicationsRepository.cs" />
@@ -320,6 +325,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202104150842466_initial-migration.resx">
+      <DependentUpon>202104150842466_initial-migration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
