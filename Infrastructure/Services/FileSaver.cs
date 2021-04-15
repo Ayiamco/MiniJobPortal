@@ -1,6 +1,5 @@
 ﻿
 using inSpark.Infrastructure.Interfaces;
-using inSpark.Models.ViewModels;
 using inSpark.Models;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using inSpark.Models;
+﻿using inSpark.Entities;
+using inSpark.Models;
 using inSpark.Models.Entities;
 using Microsoft.AspNet.Identity;
 using System;

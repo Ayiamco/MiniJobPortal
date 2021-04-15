@@ -193,22 +193,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Infrastructure\Interfaces\IFileSaver.cs" />
+    <Compile Include="Interfaces\IFileSaver.cs" />
     <Compile Include="Infrastructure\Services\FileSaver.cs" />
     <Compile Include="Infrastructure\Services\MailService.cs" />
-    <Compile Include="Migrations\202011170601406_InitialMigration.cs" />
-    <Compile Include="Migrations\202011170601406_InitialMigration.Designer.cs">
-      <DependentUpon>202011170601406_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011170603188_AddUserRples.cs" />
-    <Compile Include="Migrations\202011170603188_AddUserRples.Designer.cs">
-      <DependentUpon>202011170603188_AddUserRples.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011201802400_SeedAdmin.cs" />
-    <Compile Include="Migrations\202011201802400_SeedAdmin.Designer.cs">
-      <DependentUpon>202011201802400_SeedAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Content Include="Content\css\adminDashboard.css" />
     <Content Include="Content\css\applicantDetails.css" />
     <Content Include="Content\css\career.css" />
@@ -222,23 +209,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\HelperMethods.cs" />
-    <Compile Include="Infrastructure\Interfaces\IApplicantDbService.cs" />
-    <Compile Include="Infrastructure\Interfaces\IDbService.cs" />
-    <Compile Include="Infrastructure\Services\ApplicantDbService.cs" />
     <Compile Include="Infrastructure\Services\CustomValidationAttributes.cs" />
-    <Compile Include="Infrastructure\Services\DbContext.cs" />
-    <Compile Include="Infrastructure\Interfaces\IJobDbService.cs" />
     <Compile Include="Infrastructure\Services\ApplicationEnums.cs" />
-    <Compile Include="Infrastructure\Services\JobDbService.cs" />
     <Compile Include="Infrastructure\Services\UserRoles.cs" />
-    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\Entities\Application.cs" />
-    <Compile Include="Models\Entities\Job.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ViewModels\AdminViewModels.cs" />
-    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\ViewModels\JobViewModels.cs" />
+    <Compile Include="Dtos\AccountViewModels.cs" />
+    <Compile Include="Entities\Application.cs" />
+    <Compile Include="Entities\Job.cs" />
+    <Compile Include="Entities\IdentityModels.cs" />
+    <Compile Include="Dtos\AdminViewModels.cs" />
+    <Compile Include="Dtos\ManageViewModels.cs" />
+    <Compile Include="Dtos\JobViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ApplicationsRepository.cs" />
+    <Compile Include="Interfaces\IApplicationsRepository.cs" />
+    <Compile Include="Interfaces\IJobRepository.cs" />
+    <Compile Include="Repository\JobRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +305,7 @@
     <Folder Include="FileStorage\ApplicantsResumeFiles\" />
     <Folder Include="FileStorage\JobRequirementFiles\" />
     <Folder Include="FileStorage\ProfilePictureFiles\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -333,17 +319,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011170601406_InitialMigration.resx">
-      <DependentUpon>202011170601406_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011170603188_AddUserRples.resx">
-      <DependentUpon>202011170603188_AddUserRples.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011201802400_SeedAdmin.resx">
-      <DependentUpon>202011201802400_SeedAdmin.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

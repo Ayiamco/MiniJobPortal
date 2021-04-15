@@ -10,7 +10,6 @@ namespace inSpark.Controllers
     {
         public ActionResult Index()
         {
-           
             return View();
         }
 

@@ -1,28 +1,29 @@
-﻿using inSpark.Infrastructure.Interfaces;
+﻿
 using inSpark.Infrastructure.Services;
 using inSpark.Models.Entities;
-using inSpark.Models.ViewModels;
+using inSpark.Dtos;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using inSpark.Models;
+using inSpark.Interfaces;
 using System.Threading.Tasks;
 using AutoMapper;
+using inSpark.Entities;
 
 namespace inSpark.Controllers
 {
     [Authorize]
     public class JobsController : Controller
     {
-        public IJobDbService _jobDbContext;
-        public IApplicantDbService _applicationDbContext;
-        public JobsController(IJobDbService jobContext,IApplicantDbService applicationContext)
+        public IJobRepository _jobRepo;
+        public IApplicationsRepository _applicationsRepo;
+        public JobsController(IJobRepository jobRepo,IApplicationsRepository applicationsRepo)
         {
-            _jobDbContext = jobContext;
-            _applicationDbContext = applicationContext;
+            _jobRepo = jobRepo;
+            _applicationsRepo = applicationsRepo;
         }
 
 
@@ -30,7 +31,7 @@ namespace inSpark.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var jobs = _jobDbContext.GetActiveJobs();
+            var jobs = _jobRepo.GetActiveJobs();
          
             return View("JobListReadOnly", jobs);
         }
@@ -40,19 +41,19 @@ namespace inSpark.Controllers
             if (User.IsInRole(UserRoles.CanApplyForJobs))
             {
                 var userId = User.Identity.GetUserId();
-                Job job = _jobDbContext.ReadItem(jobId);
+                Job job = _jobRepo.ReadItem(jobId);
 
                 //save job application to applications table
-                JobApplicationStatus isApplicationSuccessful = _applicationDbContext.SaveJobApplication(userId, job);
+                JobApplicationStatus isApplicationSuccessful = _applicationsRepo.SaveJobApplication(userId, job);
                 
                 if (isApplicationSuccessful == JobApplicationStatus.Successuful)
                 {
                     //update no of applicants in jobs table
-                    _jobDbContext.UpdateNoOfApplicantsCount(jobId);
+                    _jobRepo.UpdateNoOfApplicantsCount(jobId);
 
                     //Notify Admin of application
                     
-                    ApplicationUser applicant = _applicationDbContext.GetApplicantDetails(userId);
+                    ApplicationUser applicant = _applicationsRepo.GetApplicantDetails(userId);
                     await MailService.NotifyAdminOfApplicantion(applicant.FullName, job.Title);
                 }
                     
@@ -61,7 +62,7 @@ namespace inSpark.Controllers
 
                     return View("ReApply", new ReApplyViewModel()
                     {
-                        ApplicantName = _jobDbContext.GetUserFullName(userId),
+                        ApplicantName = _jobRepo.GetUserFullName(userId),
                         JobId = jobId,
                         JobTitle=job.Title,
                         ApplicantId = User.Identity.GetUserId()
@@ -72,7 +73,7 @@ namespace inSpark.Controllers
                 var viewModel=new JobApplicationStatusViewModel()
                 {
                     ApplicantName = User.Identity.Name,
-                    JobTitle = _jobDbContext.ReadItem(jobId).Title,
+                    JobTitle = _jobRepo.ReadItem(jobId).Title,
                     JobApplicationStatus = isApplicationSuccessful,
                 };
                 return View("ApplicationStatus", viewModel);
@@ -87,7 +88,7 @@ namespace inSpark.Controllers
         public ActionResult UpdateApplication(string applicantId)
         {
 
-            ApplicationUser applicantDetails=_applicationDbContext.GetApplicantDetails(applicantId);
+            ApplicationUser applicantDetails=_applicationsRepo.GetApplicantDetails(applicantId);
             UpdateApplicantDetailsViewModel model;
             model = Mapper.Map<ApplicationUser, UpdateApplicantDetailsViewModel>(applicantDetails);
             return RedirectToAction("UpdateUser","Account",model);

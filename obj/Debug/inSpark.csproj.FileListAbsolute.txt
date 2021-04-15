@@ -117,11 +117,7 @@ C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\Ninject.Web.Common.WebHost.x
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\Ninject.Web.Mvc.xml
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\AutoMapper.dll
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\AutoMapper.xml
-C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.InitialMigration.resources
-C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.csproj.GenerateResource.cache
-C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.AddUserRples.resources
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.dll
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.Mvc.dll
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.xml
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.Mvc.xml
-C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.SeedAdmin.resources
