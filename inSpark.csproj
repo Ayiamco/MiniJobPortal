@@ -193,9 +193,10 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Infrastructure\SeedRoles.cs" />
     <Compile Include="Interfaces\IFileSaver.cs" />
-    <Compile Include="Infrastructure\Services\FileSaver.cs" />
-    <Compile Include="Infrastructure\Services\MailService.cs" />
+    <Compile Include="Infrastructure\FileSaver.cs" />
+    <Compile Include="Infrastructure\MailService.cs" />
     <Content Include="Content\css\adminDashboard.css" />
     <Content Include="Content\css\applicantDetails.css" />
     <Content Include="Content\css\career.css" />
@@ -209,9 +210,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\HelperMethods.cs" />
-    <Compile Include="Infrastructure\Services\CustomValidationAttributes.cs" />
-    <Compile Include="Infrastructure\Services\ApplicationEnums.cs" />
-    <Compile Include="Infrastructure\Services\UserRoles.cs" />
+    <Compile Include="Infrastructure\CustomValidationAttributes.cs" />
+    <Compile Include="Infrastructure\ApplicationEnums.cs" />
+    <Compile Include="Infrastructure\UserRoles.cs" />
     <Compile Include="Dtos\AccountViewModels.cs" />
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\Job.cs" />
