@@ -19,19 +19,14 @@ namespace inSpark.Entities
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [Required]
         public string Address { get; set; }
 
-        [Required]
         public string Gender { get; set; }
 
-        [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
         public string ProfilePicturePath { get; set; }
 
-        [Required]
         public string ResumePath { get; set; }
 
         public string GetUserFullName()

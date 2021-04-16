@@ -123,3 +123,4 @@ C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.xml
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.Mvc.xml
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.initialmigration.resources
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.csproj.GenerateResource.cache
+C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.moddifiedUsersTable.resources

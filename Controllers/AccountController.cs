@@ -87,37 +87,7 @@ namespace inSpark.Controllers
             }
         }
 
-        [AllowAnonymous]
-        public ActionResult AdminLogin()
-        {
-            return View();
-        }
-        //
-        // POST: /Admin/
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdminLogin(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToAction("Index", "Admin");
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
-
+        
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

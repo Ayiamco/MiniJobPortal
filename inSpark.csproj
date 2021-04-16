@@ -193,6 +193,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Infrastructure\SeedAdmin.cs" />
     <Compile Include="Infrastructure\SeedRoles.cs" />
     <Compile Include="Interfaces\IFileSaver.cs" />
     <Compile Include="Infrastructure\FileSaver.cs" />
@@ -223,6 +224,10 @@
     <Compile Include="Migrations\202104150842466_initial-migration.cs" />
     <Compile Include="Migrations\202104150842466_initial-migration.Designer.cs">
       <DependentUpon>202104150842466_initial-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104161245101_moddifiedUsersTable.cs" />
+    <Compile Include="Migrations\202104161245101_moddifiedUsersTable.Designer.cs">
+      <DependentUpon>202104161245101_moddifiedUsersTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -329,6 +334,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202104150842466_initial-migration.resx">
       <DependentUpon>202104150842466_initial-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104161245101_moddifiedUsersTable.resx">
+      <DependentUpon>202104161245101_moddifiedUsersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

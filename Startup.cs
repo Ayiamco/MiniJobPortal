@@ -11,6 +11,7 @@ namespace inSpark
         {
             ConfigureAuth(app);
             SeedRoles.EnsureCreated();
+            SeedAdmin.EnsureCreated();
         }
     }
 }

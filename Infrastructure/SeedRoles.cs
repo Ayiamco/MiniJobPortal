@@ -18,6 +18,7 @@ namespace inSpark.Infrastructure
             => new ApplicationRoleManager(new RoleStore<ApplicationRole>(Context));
 
 
+
         public static void EnsureCreated()
         {
             if (!Context.Roles.Any())
