@@ -245,6 +245,7 @@
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\general.css" />
     <Content Include="Content\css\JobApplicantsList.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\js\index.js" />
     <Content Include="Content\js\JobApplicantsList.js" />
     <Content Include="Content\PagedList.css" />

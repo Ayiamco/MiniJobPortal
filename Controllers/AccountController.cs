@@ -383,23 +383,23 @@ namespace inSpark.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (_userManager != null)
+        //        {
+        //            _userManager.Dispose();
+        //        }
 
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                }
-            }
+        //        if (_signInManager != null)
+        //        {
+        //            _signInManager.Dispose();
+        //        }
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -427,6 +427,7 @@ namespace inSpark.Controllers
             {
                 return Redirect(returnUrl);
             }
+            if (User.IsInRole(UserRoles.CanAddJobs)) return RedirectToAction("Index", "Admin");
             return RedirectToAction("Index", "Home");
         }
 

@@ -12,6 +12,7 @@ using inSpark.Interfaces;
 using System.Threading.Tasks;
 using AutoMapper;
 using inSpark.Entities;
+using inSpark.Models;
 
 namespace inSpark.Controllers
 {

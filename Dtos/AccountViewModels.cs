@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
-namespace inSpark.Dtos
+namespace inSpark.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

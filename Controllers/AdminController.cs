@@ -38,7 +38,7 @@ namespace inSpark.Controllers
         public ActionResult Index(int? i)
         {
 
-            if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.CanAddJobs))
+            if (User.IsInRole(UserRoles.CanAddJobs))
             {
                 IEnumerable<Application> applications = _applicationsRepo.GetApplications(new Guid()).ToList();
                 AdminDashboardViewModel model = new AdminDashboardViewModel()

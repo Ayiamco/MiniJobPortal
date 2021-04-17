@@ -344,6 +344,13 @@ footer {
 
 @media only screen and (min-width: 500px) {
     /* nav bar styles */
+    #top {
+        height: 10em;
+    }
+
+    .page-body{
+        min-height:calc(100vh - 20em)
+    }
     .logo-container {
         width: 20%;
     }
@@ -451,6 +458,7 @@ footer {
         justify-content: space-around;
         align-items: center;
         padding: 1em 3em;
+        height:10em;
     }
 
         footer img {

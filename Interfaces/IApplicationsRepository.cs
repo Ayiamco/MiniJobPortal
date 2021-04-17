@@ -1,6 +1,7 @@
 ﻿using inSpark.Dtos;
 using inSpark.Entities;
 using inSpark.Infrastructure.Services;
+using inSpark.Models;
 using inSpark.Models.Entities;
 using System;
 using System.Collections.Generic;
