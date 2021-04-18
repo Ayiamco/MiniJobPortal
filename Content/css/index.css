@@ -59,6 +59,11 @@ img {
 #top {
     background-color: white;
     padding: 0px 1em;
+    position: sticky;
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 header i {
@@ -92,6 +97,11 @@ nav,
 
 nav {
     background-color: white;
+    position:fixed;
+    top:70px;
+    left:0;
+    right:0;
+    z-index:1000;
 }
 
     nav a {
@@ -476,8 +486,12 @@ footer {
         padding: 0px 4rem;
         display: flex;
         justify-content: space-between;
+        position:relative;
     }
 
+    .link-hide{
+        display:none;
+    }
     #mobile-nav {
         width: 30%;
         height: 5em;
@@ -492,12 +506,14 @@ footer {
     }
 
     nav {
+        position: relative;
         display: flex !important;
-        flex-direction:row !important;
+        flex-direction: row !important;
         justify-content: space-between;
         align-items: center;
         width: 45%;
         height: 5em;
+        top:0;
     }
 
         nav a {

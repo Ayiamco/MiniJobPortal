@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using inSpark.Infrastructure.Services
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,10 +36,17 @@
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#approach" class="nav-link">Our Approach</a>
                 <a href="#contact" class="nav-link">Contact Us</a>
-                 @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    if (User.IsInRole(UserRoles.CanAddJobs))
+                    {
+                        <a href="@Url.Action("GetJobs","Admin")" class="link-hide">View applications</a>
+                        <a href="@Url.Action("LogOff","Account")" class="link-hide">Logoff</a>
+                    }
+                }
             </nav>
-
         </header>
+
         <div class="page-body">
             @RenderBody()
         </div>

@@ -1,77 +1,152 @@
 ﻿@model inSpark.Dtos.AdminDashboardViewModel
 @{
     ViewBag.Title = "AdminDashboard";
+    Layout = null;
 }
 
-<div class="admin-header">
-    <div class="admin-header-item">Recruitment Stats</div>
-    <div class="admin-header-item">@DateTime.Now.ToString("D")</div>
-    <div class="admin-header-item admin-header-id">Welcome, @Model.AdminMail <a href="@Url.Action("LogOff","Account")">Logoff</a></div>
-</div>
-<div class="admin-main">
-    <aside class="admin-aside">
-        <div id="admin-aside-title">Dashboard</div>
-        <br>
-        
-        <div><a href="@Url.Action("GetJobs","Admin")"> <p>Jobs</p> <i class="fas fa-bacon"> </i></a></div>
-        <div> <a href=""><p>Appilicants</p><i class="fas fa-users "></i></a> </i></div>
-        <div><a href=""><p>Applications</p><i class="fas fa-user-clock "></i></a></i></div>
-    </aside>
-    <div class="admin-section">
-        <h2>Admin Dashboard</h2>
-        <div class="admin-info">
+@using inSpark.Infrastructure.Services
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
 
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/index.css")
+    @Styles.Render("~/Content/css/career.css")
+    @Styles.Render("~/Content/css/careerSmallScreen.css")
+    @Styles.Render("~/Content/css/applicantDetails.css")
+    @Styles.Render("~/Content/css/JobApplicantsList.css")
+    @Styles.Render("~/Content/css/adminDashboard.css")
+    @Styles.Render("~/Content/css/login.css")
+    <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="~/Content/js/index.js" defer></script>
 
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Jobs </p>
-                    <i class="fas fa-tools fa-2x"></i>
-
-
-                </div>
-
-                <p id="info-card-number">@Model.NoOfJobs</p>
+</head>
+<body>
+    <div class="pg-container">
+        <header id="top">
+            <div id="mobile-nav">
+                <figure class="logo-container">
+                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                </figure>
+                <i id="show-nav" class="fas fa-bars  "></i>
+                <i id="hide-nav" class="fas fa-times-circle  "></i>
             </div>
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Users </p>
-                    <i class="fas fa-users fa-2x"></i>
-                </div>
-                <p id="info-card-number">@Model.NoOfApplicants</p>
-            </div>
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Applications</p>
-                    <i class="fas fa-user-clock fa-2x"></i>
-                </div>
-                <p id="info-card-number">@Model.NoOfApplications</p>
-            </div>
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Rejected</p>
-                    <i class="fas fa-times fa-2x"></i>
-                </div>
+            <nav>
+                <a href="@Url.Action("Index","Home")" class="nav-link">About Us</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Services</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Our Approach</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Contact Us</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    if (User.IsInRole(UserRoles.CanAddJobs))
+                    {
+                        <a href="@Url.Action("GetJobs","Admin")" class="link-hide">View applications</a>
+                        <a href="@Url.Action("LogOff","Account")" class="link-hide">Logoff</a>
+                    }
+                }
+            </nav>
+        </header>
 
-                <p id="info-card-number">@Model.NoOfRejectedApplications </p>
-            </div>
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Accepted</p>
-                    <i class="fas fa-check fa-2x"></i>
-                </div>
+        <div class="page-body">
+            <div class="admin-page-con">
+                <aside class="admin-aside">
+                    <div class="admin-aside-header">Dashboard</div>
+                    <div class="admin-aside-content">
+                        <div><a href="@Url.Action("GetJobs","Admin")"> <p>View Job Applications</p> <i class="fas fa-bacon"> </i></a></div>
+                        <div><a href="@Url.Action("CreateJob","Admin")"> <p>Add Job</p> <i class="fas fa-bacon"> </i></a></div>
+                        <div><a href="@Url.Action("LogOff","Account")"><p>Log Off</p></a></div>
+                    </div>
 
-                <p id="info-card-number">@Model.NoOfAcceptedApplications </p>
-            </div>
-            <div class="admin-info-card">
-                <div class="admin-info-desc">
-                    <p>Not Reviewed</p>
-                    <i class="fas fa-cogs fa-2x"></i>
-                </div>
+                </aside>
+                <main class="admin-main">
+                    <div class="admin-main-header">
+                        <div class="admin-header-item">@DateTime.Now.ToString("D")</div>
+                        <div class="admin-header-item admin-header-id">Welcome, @Model.AdminMail </div>
+                    </div>
+                    <div class="admin-section">
+                        <h2>Admin Dashboard</h2>
+                        <div class="admin-info">
+                            <div class="admin-header-item">@DateTime.Now.ToString("D")</div>
+                            <div class="admin-header-item admin-header-id">Welcome, @Model.AdminMail </div>
+                        </div>
+                        <div class="admin-stats-section">
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Jobs </p>
+                                    <i class="fas fa-tools fa-2x"></i>
+                                </div>
+                                <p id="info-card-number">@Model.NoOfJobs</p>
+                            </div>
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Users </p>
+                                    <i class="fas fa-users fa-2x"></i>
+                                </div>
+                                <p id="info-card-number">@Model.NoOfApplicants</p>
+                            </div>
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Applications</p>
+                                    <i class="fas fa-user-clock fa-2x"></i>
+                                </div>
+                                <p id="info-card-number">@Model.NoOfApplications</p>
+                            </div>
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Rejected</p>
+                                    <i class="fas fa-times fa-2x"></i>
+                                </div>
 
-                <p id="info-card-number">@Model.NoOfNotReviewedApplications </p>
+                                <p id="info-card-number">@Model.NoOfRejectedApplications </p>
+                            </div>
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Accepted</p>
+                                    <i class="fas fa-check fa-2x"></i>
+                                </div>
+
+                                <p id="info-card-number">@Model.NoOfAcceptedApplications </p>
+                            </div>
+                            <div class="admin-info-card">
+                                <div class="admin-info-desc">
+                                    <p>Not Reviewed</p>
+                                    <i class="fas fa-cogs fa-2x"></i>
+                                </div>
+
+                                <p id="info-card-number">@Model.NoOfNotReviewedApplications </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </main>
+
             </div>
         </div>
+        <footer>
+            <div class="ft-left">
+                <a href="">Terms & Conditions</a>
+                <a href="">Privacy policy</a>
+            </div>
+            <div class="ft-center"><p>&copy inSpark 2020</p></div>
+            <div class="ft-right">
+                <a href=""><img src="~/Content/images/facebook.svg"></a>
+                <a href=""><img src="~/Content/images/Instagram.svg"></a>
+                <a href=""><img src="~/Content/images/LinkedIn.svg"></a>
+                <a href=""><img src="~/Content/images/Twitter.svg"></a>
+            </div>
+        </footer>
 
     </div>
 
-</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+

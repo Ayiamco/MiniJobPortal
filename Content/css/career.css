@@ -70,6 +70,13 @@
     padding-right: 10px;
 }
 
+#mailing-list{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    padding:1em 0em;
+}
 .apply a {
     text-decoration: none;
 }
