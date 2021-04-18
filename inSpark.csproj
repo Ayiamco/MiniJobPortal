@@ -201,7 +201,6 @@
     <Content Include="Content\css\adminDashboard.css" />
     <Content Include="Content\css\applicantDetails.css" />
     <Content Include="Content\css\career.css" />
-    <Content Include="Content\css\careerSmallScreen.css" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -243,7 +242,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\index.css" />
-    <Content Include="Content\css\general.css" />
     <Content Include="Content\css\JobApplicantsList.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\js\index.js" />

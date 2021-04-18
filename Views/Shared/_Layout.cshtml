@@ -8,10 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/css/index.css")
-    @Styles.Render("~/Content/css/indexSmallScreen.css")
     @Styles.Render("~/Content/css/career.css")
     @Styles.Render("~/Content/css/careerSmallScreen.css")
-    @Styles.Render("~/Content/css/general.css")
     @Styles.Render("~/Content/css/applicantDetails.css")
     @Styles.Render("~/Content/css/JobApplicantsList.css")
     @Styles.Render("~/Content/css/adminDashboard.css")
@@ -24,12 +22,10 @@
 </head>
 <body>
     <div class="pg-container">
-        
         <header id="top">
             <div id="mobile-nav">
                 <figure class="logo-container">
                     <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
-                    @*<img id="logo" src="./images/logo.png" alt="">*@
                 </figure>
                 <i id="show-nav" class="fas fa-bars  "></i>
                 <i id="hide-nav" class="fas fa-times-circle  "></i>
@@ -39,13 +35,13 @@
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#approach" class="nav-link">Our Approach</a>
                 <a href="#contact" class="nav-link">Contact Us</a>
-                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                 @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
             </nav>
 
         </header>
-     
-        @RenderBody()
-
+        <div class="page-body">
+            @RenderBody()
+        </div>
         <footer>
             <div class="ft-left">
                 <a href="">Terms & Conditions</a>
@@ -59,7 +55,7 @@
                 <a href=""><img src="~/Content/images/Twitter.svg"></a>
             </div>
         </footer>
-        
+
     </div>
 
         @Scripts.Render("~/bundles/jquery")

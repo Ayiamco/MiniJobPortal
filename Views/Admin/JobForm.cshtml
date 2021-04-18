@@ -1,4 +1,4 @@
-﻿@model inSpark.Models.ViewModels.JobFormViewModel
+﻿@model inSpark.Dtos.JobFormViewModel
 
 @{
     ViewBag.Title = "New Job";
@@ -26,19 +26,16 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @try
-    {
-        <input name="Id" value="@Model.Id" hidden />
-    }
-    catch
-    {
-        <input name="Id" hidden />
-    }
-
-
-    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @try
+        {
+            <input name="Id" value="@Model.Id" hidden />
+        }
+        catch
+        {
+            <input name="Id" hidden />
+        }
     <div class="form-group">
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">

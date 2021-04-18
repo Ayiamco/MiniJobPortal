@@ -2,7 +2,9 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    border-radius:5px:
+    border-radius:5px;
+    margin-top:2em;
+    padding-bottom:1.5em;
 
 }
 

@@ -1,5 +1,98 @@
-﻿@media (min-width:900px) {
+﻿
 
+/*Mobile screen styles*/
+.banner-section {
+    width: 100vw;
+    height: 50vh;
+    margin: 0px;
+    z-index: -1;
+}
+
+#banner-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-section h1 {
+    color: white;
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+}
+
+.growth-card {
+    padding: 5px;
+    text-align: center;
+}
+
+    .growth-card h1 {
+        color: rgb(22, 22, 92);
+        font-family: 'Fira Sans', 'sans-serif', monospace;
+    }
+
+#img-glasgow {
+    height: 40vh;
+    width: 100%;
+}
+
+.jobs-header {
+    font-family: 'Fira Sans', 'sans-serif', monospace;
+    background-color: rgb(22, 22, 92);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+
+#job-card {
+    margin: 20px 20px;
+    z-index: 2;
+    padding: 5px;
+    text-align: center;
+    box-shadow: 2px 2px 2px 2px #e4e3e3;
+}
+
+#job-requirement p {
+    margin-left: 5px;
+}
+
+#job-requirement {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+}
+
+.job-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.apply a {
+    text-decoration: none;
+}
+
+/*wide screen styles*/
+@media only screen and (max-width:500px) {
+    .banner-section h1 {
+        margin-top: -35vh;
+        text-align: center;
+        padding-left: 25%;
+        padding-right: 5%;
+        font-size: 30px;
+    }
+
+    .growth-card {
+        margin: 20px 20px;
+        box-shadow: 2px 2px 2px 2px #e4e3e3;
+    }
+}
+
+
+/*Destop screen styles*/
+@media (min-width:900px) {
     .banner-section {
         width: 100%;
         min-height: 100vh;
@@ -32,14 +125,14 @@
         padding: 40px;
     }
 
-        .growth-card p {
-            margin: 5px 30px;
-            font-size: larger;
-        }
+    .growth-card p {
+        margin: 5px 30px;
+        font-size: larger;
+    }
 
-        .growth-card h1 {
-            margin: 0px;
-        }
+    .growth-card h1 {
+        margin: 0px;
+    }
 
     #img-glasgow {
         max-width: 50%;

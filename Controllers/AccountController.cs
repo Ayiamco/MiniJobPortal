@@ -25,25 +25,11 @@ namespace inSpark.Controllers
     {
         private IApplicationsRepository _applicantionsRepo;
         private IFileSaver _fileSaver;
+        private ApplicationSignInManager _signInManager => HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+        private ApplicationUserManager _userManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    
 
-        private ApplicationSignInManager _signInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-        }
-
-        public ApplicationUserManager _userManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-
-        }
-
-        public AccountController(IFileSaver fileSaver,IApplicationsRepository applicantionsRepo)
+         public AccountController(IFileSaver fileSaver,IApplicationsRepository applicantionsRepo)
         {
             _fileSaver = fileSaver;
             _applicantionsRepo = applicantionsRepo;
@@ -70,6 +56,10 @@ namespace inSpark.Controllers
             if (!ModelState.IsValid)  return View(model); 
             
             var user = _userManager.FindByEmail(model.Email);
+            if (user==null) {
+                ModelState.AddModelError("", "Account does not exist");
+                return View(model);
+            }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)

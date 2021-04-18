@@ -58,7 +58,7 @@ namespace inSpark.Controllers
                 return View("AdminDashboard",model);
             }
                
-            return RedirectToAction("AdminLogin", "Account");
+            return RedirectToAction("Login", "Account");
         }
 
 
