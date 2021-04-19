@@ -124,3 +124,7 @@ C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\PagedList.Mvc.xml
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.initialmigration.resources
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.csproj.GenerateResource.cache
 C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\obj\Debug\inSpark.Migrations.moddifiedUsersTable.resources
+C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\SendGrid.dll
+C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\StarkbankEcdsa.dll
+C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\SendGrid.pdb
+C:\Users\Joe\Desktop\joseph\projects\c#\inSpark\bin\SendGrid.xml

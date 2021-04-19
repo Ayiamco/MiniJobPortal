@@ -2,47 +2,40 @@
 using inSpark.Models;
 using inSpark.Models.Entities;
 using Microsoft.AspNet.Identity;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 
 namespace inSpark.Infrastructure.Services
 {
     public static class MailService
     {
-        public static async Task SendMail(string recieverEmail, string messageBody, string messageSubject)
+        public static async Task SendEmailAsync(string destination,  string messageBody, string messageSubject)
         {
-            try
+            var apiKey = WebConfigurationManager.AppSettings["apiKey"];
+            var user = WebConfigurationManager.AppSettings["user"];
+
+            var mailClient = new SendGridClient(apiKey);
+
+            var email = new SendGridMessage()
             {
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new System.Net.NetworkCredential()
-                {
-                    UserName = "ayiamco@gmail.com",
-                    Password = "chukwuyerechukwuyere"
-                };
-                smtpClient.EnableSsl = true;
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                From = new EmailAddress("tochukwuchinedu21@gmail.com", user),
+                Subject = messageSubject,
+                PlainTextContent = messageBody,
+                HtmlContent = messageBody
+            };
 
-                MailMessage mailMessage = new MailMessage()
-                {
-                    To = { recieverEmail },
-                    Body = messageBody,
-                    From = new MailAddress( "ayiamco@gmail.com"),
-                    Subject = messageSubject
-                };
-
-                await smtpClient.SendMailAsync(mailMessage);
-                smtpClient.Dispose();
-                return;
-            }
-            catch (Exception e) { Console.WriteLine(e); }
-
-
+            email.AddTo(new EmailAddress(destination));
+            email.SetClickTracking(false, false);
+            await mailClient.SendEmailAsync(email);
         }
+       
 
         public static async  Task NotifyAdminOfApplicantion(string applicantName ,string jobName)
         {
