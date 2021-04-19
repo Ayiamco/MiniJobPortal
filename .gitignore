@@ -1,4 +1,7 @@
-*.pdf 
-*.png
-*.jpg
+FileStorage
 ApiKeys.Config
+obj
+bin
+*.suo
+*.user
+packages
