@@ -322,7 +322,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Folder\" />
+    <Folder Include="FileStorage\ApplicantsResumeFiles\" />
+    <Folder Include="FileStorage\JobRequirementFiles\" />
+    <Folder Include="FileStorage\ProfilePictureFiles\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
