@@ -19,7 +19,7 @@
     margin-bottom:3em;
 }
 .admin-info-card {
-    background-color: white;
+    background-color: rgb(248,248,255);
     border-radius: 10px;
     box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);
     -webkit-box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);

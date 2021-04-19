@@ -15,6 +15,7 @@ using PagedList.Mvc;
 using PagedList;
 using inSpark.Interfaces;
 using inSpark.Entities;
+using System.Diagnostics;
 
 namespace inSpark.Controllers
 {
@@ -65,7 +66,6 @@ namespace inSpark.Controllers
         //GET: /Admin/CreateJob
         public ActionResult CreateJob(JobFormViewModel model=null)
         {
-            
             if (model.JobRequirement == null)
                 return View("JobForm");
             
@@ -78,36 +78,19 @@ namespace inSpark.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveJob(JobFormViewModel model)
         {
-            if (!ModelState.IsValid)
-                return RedirectToAction("CreateJob", model);
-
-            //Check If JobDeadline is a Future Date
-            if (!HelperMethods.IsValidDeadLine(model.DeadLine))
-                throw new Exception("Invalid Job Deadline");
+            if (!ModelState.IsValid) return RedirectToAction("CreateJob", model);
 
             //Save jobRequirement to FileStorage/JobRequirements Folder
             string fileStoragePath = _fileSaver.SaveFile(model.JobRequirement, Request.RequestContext);
 
             //map the JobFormViewModel to the Job Entity
-            Job jobModel;
-            jobModel = Mapper.Map<JobFormViewModel, Job>(model);
-
-            //Add the Missing Properties in Job object
+            Job jobModel= Mapper.Map<JobFormViewModel, Job>(model);
+            jobModel.AcceptanceMailMessage = jobModel.AcceptanceMailMessage.Trim();
+            jobModel.RejectionMailMessage = jobModel.RejectionMailMessage.Trim();
             jobModel.JobRequirementPath = fileStoragePath;
-            if (model.Id == new Guid())
-            {
-                //Save Job Entity to DB
-                jobModel.DatePublished = DateTime.Now;
-                _jobRepo.CreateItem(jobModel);
-            }
-            else
-            {
-                //update job details
-                _jobRepo.UpdateItem(jobModel);
-            }
-            
+            jobModel.DatePublished = DateTime.Now;
+            _jobRepo.CreateItem(jobModel);
             return RedirectToAction("GetJobs");
-
         }
 
         public ActionResult Job (Guid jobId)
