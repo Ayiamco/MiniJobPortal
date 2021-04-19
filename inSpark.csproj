@@ -200,6 +200,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Infrastructure\CreateStorgeDirectory.cs" />
     <Compile Include="Infrastructure\SeedAdmin.cs" />
     <Compile Include="Infrastructure\SeedRoles.cs" />
     <Compile Include="Interfaces\IFileSaver.cs" />
@@ -321,9 +322,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
-    <Folder Include="FileStorage\ApplicantsResumeFiles\" />
-    <Folder Include="FileStorage\JobRequirementFiles\" />
-    <Folder Include="FileStorage\ProfilePictureFiles\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -23,16 +23,14 @@ namespace inSpark.Infrastructure.Services
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
 
             //adding the new file name to the  file storage path
-            string storagePath = "/FileStorage/JobRequirementFiles/" + fileName;
+            string storagePath = StorageDirectories.JobRequirementFilesPath + fileName;
 
             Initialize(requestContext);
             //prefixing the  fileName with the storage folder path
-            fileName = Path.Combine(Server.MapPath("~/FileStorage/JobRequirementFiles"), fileName);
+            fileName = Path.Combine(Server.MapPath(StorageDirectories.JobRequirementFiles), fileName);
 
             //saving the file in the file folder
             file.SaveAs(fileName);
-
-            
             return storagePath;
         }
 
