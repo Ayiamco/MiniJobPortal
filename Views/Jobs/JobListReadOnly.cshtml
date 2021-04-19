@@ -1,60 +1,136 @@
 ﻿@model IEnumerable<inSpark.Models.Entities.Job>
 @{
     ViewBag.Title = "Careers";
+    Layout = null;
 }
 
+@using inSpark.Infrastructure.Services
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
 
-<div class="banner-section">
-    <img id="banner-img" src="~/Content/images/careerbanner.jpg" alt="backgroiund image">
-    <h1>See how far your thinking can go</h1>
-</div>
-<div class="mid-section">
-    <div class="growth-card">
-        <h1>Endless growth opportunities</h1>
-        <p>
-            Our firms culture is rooted in our core
-            principles. Here, you will join diverse and
-            inclusive teams that support each other and
-            empower you to do your best work.
-        </p>
-    </div>
-    <img id="img-glasgow" src="~/Content/images/people-Glasgow.jpg" alt="">
-</div>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/index.css")
+    @Styles.Render("~/Content/css/career.css")
+    @Styles.Render("~/Content/css/careerSmallScreen.css")
+    @Styles.Render("~/Content/css/applicantDetails.css")
+    @Styles.Render("~/Content/css/JobApplicantsList.css")
+    @Styles.Render("~/Content/css/adminDashboard.css")
+    @Styles.Render("~/Content/css/login.css")
+    <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="~/Content/js/index.js" defer></script>
 
+</head>
+<body>
+    <div class="pg-container">
+        <header id="top">
+            <div id="mobile-nav">
+                <figure class="logo-container">
+                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                </figure>
+                <i id="show-nav" class="fas fa-bars  "></i>
+                <i id="hide-nav" class="fas fa-times-circle  "></i>
+            </div>
+            <nav>
+                <a href="@Url.Action("Index","Home")" class="nav-link">About Us</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Services</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Our Approach</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Contact Us</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    if (User.IsInRole(UserRoles.CanAddJobs))
+                    {
+                        <a href="@Url.Action("GetJobs","Admin")" class="link-hide">View applications</a>
+                        <a href="@Url.Action("LogOff","Account")" class="link-hide">Logoff</a>
+                    }
+                }
+            </nav>
+        </header>
 
-<h1 class="jobs-header">Open Positions</h1>
-<div id="open-positions">
-    @if (Model != null)
-    {
-        foreach (inSpark.Models.Entities.Job job in Model)
-        {
-            if (job.DeadLine - DateTime.Now.AddDays( 1) > new TimeSpan())
-            {
-                <div id = "job-card" >
-                    <h3>@job.Title</h3>
-                    <p>Application Deadline: @job.DeadLine.ToString("d")</p>
-                    <div class="job-card-footer">
-                        <a id="job-requirement" href="@job.JobRequirementPath" target="_blank">
-                            <i class="fas fa-download"> Job Requirements</i>
-                            
-                        </a>
-                        <div class="apply">
-                             @Html.ActionLink("Apply Now", "Apply", "Jobs", null, null, null, new { jobId = job.Id }, new {@style= "color:#337ab7; font-weight:600" })
-                           
-                        </div>
-                    </div>
+        <div class="page-body">
+            <div class="banner-section">
+                <img id="banner-img" src="~/Content/images/careerbanner.jpg" alt="backgroiund image">
+                <h1>See how far your thinking can go</h1>
+            </div>
+            <div class="mid-section">
+                <div class="growth-card">
+                    <h1>Endless growth opportunities</h1>
+                    <p>
+                        Our firms culture is rooted in our core
+                        principles. Here, you will join diverse and
+                        inclusive teams that support each other and
+                        empower you to do your best work.
+                    </p>
                 </div>
-            }
-            
-        }
-    }
-    else
-    {
-        <h1>No Open Positions For now</h1>
-        <a>Join our mailing list</a>
-    }
+                <img id="img-glasgow" src="~/Content/images/people-Glasgow.jpg" alt="">
+            </div>
+
+
+            <h1 class="jobs-header">Open Positions</h1>
+            <div id="open-positions">
+                @if (Model.Count() != 0)
+                {
+                    foreach (inSpark.Models.Entities.Job job in Model)
+                    {
+                        if (job.DeadLine - DateTime.Now.AddDays(1) > new TimeSpan())
+                        {
+                            <div id="job-card">
+                                <h3>@job.Title</h3>
+                                <p>Application Deadline: @job.DeadLine.ToString("d")</p>
+                                <div class="job-card-footer">
+                                    <a id="job-requirement" href="@job.JobRequirementPath" target="_blank">
+                                        <i class="fas fa-download"> Job Requirements</i>
+
+                                    </a>
+                                    <div class="apply">
+                                        @Html.ActionLink("Apply Now", "Apply", "Jobs", null, null, null, new { jobId = job.Id }, new { @style = "color:#337ab7; font-weight:600" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <div id="mailing-list">
+                        <h1>No Open Positions For now</h1>
+                        <a href="">Join our mailing list</a>
+                    </div>
+                    
+                }
 
 
 
-</div>
+            </div>
+
+        </div>
+        <footer>
+            <div class="ft-left">
+                <a href="">Terms & Conditions</a>
+                <a href="">Privacy policy</a>
+            </div>
+            <div class="ft-center"><p>&copy inSpark 2020</p></div>
+            <div class="ft-right">
+                <a href=""><img src="~/Content/images/facebook.svg"></a>
+                <a href=""><img src="~/Content/images/Instagram.svg"></a>
+                <a href=""><img src="~/Content/images/LinkedIn.svg"></a>
+                <a href=""><img src="~/Content/images/Twitter.svg"></a>
+            </div>
+        </footer>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+
 

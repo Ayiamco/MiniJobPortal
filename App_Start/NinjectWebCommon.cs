@@ -7,6 +7,8 @@ namespace inSpark.App_Start
     using System.Web;
     using inSpark.Infrastructure.Interfaces;
     using inSpark.Infrastructure.Services;
+    using inSpark.Interfaces;
+    using inSpark.Repository;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -46,8 +48,8 @@ namespace inSpark.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IJobDbService>().To<JobDbService>();
-                kernel.Bind<IApplicantDbService>().To<ApplicantDbService>();
+                kernel.Bind<IJobRepository>().To<JobRepository>();
+                kernel.Bind<IApplicationsRepository>().To<ApplicationsRepository>();
                 kernel.Bind<IFileSaver>().To<FileSaver>();
                 RegisterServices(kernel);
                 return kernel;

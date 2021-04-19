@@ -42,37 +42,6 @@ window.onload = function () {
 
 
 
-////animation using gsap
-//gsap.registerPlugin(ScrollTrigger)
-////nav-bar animation
-//gsap.from("#top", { duration: 1, ease: "bounce", y: "-200%" })
-//gsap.from(".nav-link", { duration: 1, delay: 1, opacity: 0, stagger: .2 })
-
-////main section animation
-//gsap.from('.main-bd', { duration: 1, ease: "power2", x: "-200%", delay: 2 })
-//gsap.from('.main-hero', { duration: 1, ease: "bounce", x: "200%", delay: 2 })
-
-////services section animation 
-//gsap.from('.services-container', {
-//    duration: 1, ease: 'linear', y: "20%", scrollTrigger: {
-//        trigger: ".services-container",
-//        toggleActions: "restart none restart none"
-//    }
-//}
-//)
-
-////approach  section animations
-//gsap.from('#approach-img', {
-//    duration: 1, delay: 2, ease: "linear", x: "100%", scrollTrigger: {
-//        trigger: "#approach-img",
-//        toggleActions: "restart none restart none"
-//    }
-//}
-//)
-//gsap.from('#approach-bd', {
-//    duration: 1, delay: 2, ease: "linear", x: "-100%", scrollTrigger: {
-//        trigger: "#approach-bd",
-//        toggleActions: "restart none restart none"
-//    }
-//}
-//)
+window.addEventListener("resize", () => {
+    console.log("resized")
+})

@@ -14,55 +14,27 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using AutoMapper;
 using System.IO;
 using inSpark.Infrastructure.Interfaces;
+using inSpark.Entities;
+using inSpark.Dtos;
+using inSpark.Interfaces;
 
 namespace inSpark.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private IApplicantDbService _dbContext;
+        private IApplicationsRepository _applicantionsRepo;
         private IFileSaver _fileSaver;
+        private ApplicationSignInManager _signInManager => HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+        private ApplicationUserManager _userManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    
 
-        public AccountController(IApplicantDbService context,IFileSaver fileSaver)
+         public AccountController(IFileSaver fileSaver,IApplicationsRepository applicantionsRepo)
         {
-            _dbContext = context;
             _fileSaver = fileSaver;
-        }
-        
-
-        
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            _applicantionsRepo = applicantionsRepo;
         }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
 
         //
         // GET: /Account/Login
@@ -81,21 +53,15 @@ namespace inSpark.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model); 
+            if (!ModelState.IsValid)  return View(model); 
+            
+            var user = _userManager.FindByEmail(model.Email);
+            if (user==null) {
+                ModelState.AddModelError("", "Account does not exist");
+                return View(model);
             }
-            var user = _dbContext.GetApplicantDetails(model.Email);
 
-            //check if user email is  confirmed
-            //if (!user.EmailConfirmed)
-            //{
-            //    //return View("DisplayEmail");
-            //}
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -111,79 +77,21 @@ namespace inSpark.Controllers
             }
         }
 
-        [AllowAnonymous]
-        public ActionResult AdminLogin()
-        {
-            return View();
-        }
-        //
-        // POST: /Admin/
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdminLogin(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToAction("Index", "Admin");
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
-
+        
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
+            if (!await _signInManager.HasBeenVerifiedAsync())
             {
                 return View("Error");
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
-                    return View(model);
-            }
-        }
+        
 
         //
         // GET: /Account/Register
@@ -209,44 +117,20 @@ namespace inSpark.Controllers
                 string profilePicturePath= _fileSaver.SaveFile(model.ProfilePicture, Request.RequestContext);
                 string resumeFilePath= _fileSaver.SaveFile(model.Resume, Request.RequestContext);
 
-                //Adding the file paths to the Applicant Entity
                 user.ProfilePicturePath = profilePicturePath;
                 user.ResumePath = resumeFilePath;
                 user.UserName = model.Email;
-               
 
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-                
+                IdentityResult result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)
                 {
-                    ////Generate Email verification code
-                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action(
-                    //   "ConfirmEmail", "Account",
-                    //   new { userId = user.Id,  code },
-                    //   protocol: Request.Url.Scheme);
-
-                    ////send verification mail to new user
-                    //await UserManager.SendEmailAsync(user.Id,
-                    //   "Confirm your account",
-                    //   "Please confirm your account by clicking this link: <a href=\""
-                    //                                   + callbackUrl + "\">link</a>");
-                    //add new user to correct role 
-                    await UserManager.AddToRoleAsync(user.Id, UserRoles.CanApplyForJobs);
-
-
-
-                    //--Uncomment to code below to sign in user instead of sending to email confirmation page
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    //return RedirectToAction("Index", "Home");
-
-                    //return user to confirm email page 
-                    return View("Login");
-
+                    await _userManager.AddToRoleAsync(user.Id, UserRoles.CanApplyForJobs);
+                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Index", "Home");
                 }
+
                 AddErrors(result);
             }
-           
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -267,26 +151,11 @@ namespace inSpark.Controllers
                 return View("UpdateDetails", model);
             string profilePicturePath= _fileSaver.SaveFile(model.ProfilePicture, Request.RequestContext); 
             string resumePath = _fileSaver.SaveFile(model.ProfilePicture, Request.RequestContext);
-
             model.ResumePath = resumePath;
             model.ProfilePicturePath = profilePicturePath;
 
-            _dbContext.UpdateApplicantDetails(model);
+            _applicantionsRepo.UpdateApplicantDetails(model);
             return RedirectToAction("Index", "Home");
-
-        }
-
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         //
@@ -306,19 +175,18 @@ namespace inSpark.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await _userManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -352,13 +220,13 @@ namespace inSpark.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
@@ -391,12 +259,12 @@ namespace inSpark.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            var userId = await _signInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
                 return View("Error");
             }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
+            var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
@@ -414,7 +282,7 @@ namespace inSpark.Controllers
             }
 
             // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
+            if (!await _signInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
                 return View("Error");
             }
@@ -433,7 +301,7 @@ namespace inSpark.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await _signInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -472,13 +340,13 @@ namespace inSpark.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await _userManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -505,25 +373,23 @@ namespace inSpark.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (_userManager != null)
+        //        {
+        //            _userManager.Dispose();
+        //        }
 
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
+        //        if (_signInManager != null)
+        //        {
+        //            _signInManager.Dispose();
+        //        }
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -551,6 +417,7 @@ namespace inSpark.Controllers
             {
                 return Redirect(returnUrl);
             }
+            if (User.IsInRole(UserRoles.CanAddJobs)) return RedirectToAction("Index", "Admin");
             return RedirectToAction("Index", "Home");
         }
 

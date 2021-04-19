@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using inSpark.Infrastructure;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(inSpark.Startup))]
@@ -9,7 +10,8 @@ namespace inSpark
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            
+            SeedRoles.EnsureCreated();
+            SeedAdmin.EnsureCreated();
         }
     }
 }

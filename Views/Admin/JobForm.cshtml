@@ -1,23 +1,12 @@
-﻿@model inSpark.Models.ViewModels.JobFormViewModel
+﻿@model inSpark.Dtos.JobFormViewModel
 
 @{
     ViewBag.Title = "New Job";
-    string date;
-    string btnText;
-
-    try
-    {
-        date = @Model.DeadLine.ToString("d");
-        btnText = "Update";
-    }
-    catch
-    {
-        date = "";
-        btnText = "Create New";
-
-    }
-
-
+    string date=Model == null ? "" : Model.DeadLine.ToString("d");
+    string btnText = date == "" ? "Create New" : "Update";
+    string rejectionMessage = Model == null ? "" : Model.RejectionMailMessage;
+    string acceptanceMessage=Model == null ? "" : Model.AcceptanceMailMessage;
+    
 }
 
 <h2 class="text-center" style="margin-bottom : 30px">@btnText Job Position</h2>
@@ -26,19 +15,8 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @try
-    {
-        <input name="Id" value="@Model.Id" hidden />
-    }
-    catch
-    {
-        <input name="Id" hidden />
-    }
-
-
-    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
@@ -51,7 +29,6 @@
         @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
             <input type="datetime" value="@date" name="DeadLine" class="form-control" />
-
             @Html.ValidationMessageFor(model => model.DeadLine, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -74,12 +51,7 @@
         @Html.LabelFor(model => model.AcceptanceMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
             <textarea style="resize:none" class="form-control input-lg" rows="5" name="AcceptanceMailMessage" required>
-            @try{
-                @Model.AcceptanceMailMessage
-            }
-            catch { }
             </textarea>
-
             @Html.ValidationMessageFor(model => model.AcceptanceMailMessage, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -87,20 +59,12 @@
         @Html.LabelFor(model => model.RejectionMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
         <div class="col-md-5">
             <textarea style="resize:none" class="form-control input-lg" rows="5" name="RejectionMailMessage" required>
-                @try
-                {@Model.RejectionMailMessage}
-                catch { }
             </textarea>
-
             @Html.ValidationMessageFor(model => model.RejectionMailMessage, "", new { @class = "text-danger" })
         </div>
     </div>
+    <button type="submit"  class="btn btn-primary">@btnText Job</button>
 
-    <div class="form-group">
-        <div class="col-md-offset-5  ">
-            <input type="submit" value="@btnText Job" class="btn btn-primary" />
-        </div>
-    </div>
 </div>
 }
 

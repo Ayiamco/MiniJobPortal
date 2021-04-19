@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using inSpark.Models.Entities;
-using inSpark.Models.ViewModels;
+using inSpark.Dtos;
 using inSpark.Models;
+using inSpark.Entities;
 
 namespace inSpark.App_Start
 {

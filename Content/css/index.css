@@ -16,6 +16,11 @@ html {
     box-sizing: border-box;
 }
 
+body{
+    padding:0;
+    margin:0;
+}
+
 h1 {
     font-family: "fira sans";
 }
@@ -27,12 +32,19 @@ h2 {
     text-align: center;
 }
 
+a{
+    text-decoration:none !important;
+}
+
 img {
     width: 100%;
-    height: 100%;
+    height: 100%
     object-fit: contain;
 }
 
+.page-body{
+    min-height: calc(100vh - 180px)
+}
 @keyframes showItem {
     from {
         opacity: 0;
@@ -47,6 +59,11 @@ img {
 #top {
     background-color: white;
     padding: 0px 1em;
+    position: sticky;
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 header i {
@@ -80,6 +97,11 @@ nav,
 
 nav {
     background-color: white;
+    position:fixed;
+    top:70px;
+    left:0;
+    right:0;
+    z-index:1000;
 }
 
     nav a {
@@ -353,10 +375,10 @@ footer {
         padding: 1em 3em;
     }
 
-        #main figure {
-            width: 90%;
-            height: auto;
-        }
+    #main figure {
+        width: 90%;
+        height: auto;
+    }
 
     /* services section styles */
     #services figure {
@@ -464,27 +486,34 @@ footer {
         padding: 0px 4rem;
         display: flex;
         justify-content: space-between;
+        position:relative;
     }
 
+    .link-hide{
+        display:none;
+    }
     #mobile-nav {
         width: 30%;
         height: 5em;
     }
 
-        #mobile-nav i {
-            display: none;
-        }
+    #mobile-nav i,fa-bars, fa-times-circle {
+        display: none !important;
+    }
 
-        #mobile-nav figure {
-            width: 50%;
-        }
+    #mobile-nav figure {
+        width: 50%;
+    }
 
     nav {
-        display: flex;
+        position: relative;
+        display: flex !important;
+        flex-direction: row !important;
         justify-content: space-between;
         align-items: center;
         width: 45%;
         height: 5em;
+        top:0;
     }
 
         nav a {
