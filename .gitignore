@@ -1,7 +1,11 @@
 FileStorage/
-ApiKeys.Config
+app.config
 obj/
 bin/
 *.suo
 *.user
 packages
+*.mdf
+*.ldf
+Web.Debug.config
+Web.Release.config
