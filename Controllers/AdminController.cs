@@ -35,7 +35,6 @@ namespace inSpark.Controllers
         }
 
         // GET: /Admin
-        [AllowAnonymous]
         public ActionResult Index(int? i)
         {
 
@@ -59,16 +58,15 @@ namespace inSpark.Controllers
                 return View("AdminDashboard",model);
             }
                
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Account", new { returnUrl="/Admin/Index"});
         }
 
 
         //GET: /Admin/CreateJob
         public ActionResult CreateJob(JobFormViewModel model=null)
         {
-            if (model.JobRequirement == null)
-                return View("JobForm");
-            
+            if (model == null) return View("JobForm",null);
+          
             return View("JobForm",model);
         }
 
@@ -80,6 +78,10 @@ namespace inSpark.Controllers
         {
             if (!ModelState.IsValid) return RedirectToAction("CreateJob", model);
 
+            if (!string.IsNullOrWhiteSpace(model.Id)) {
+                UpdateJob(model);
+                return RedirectToAction("GetJobs");
+            }; 
             //Save jobRequirement to FileStorage/JobRequirements Folder
             string fileStoragePath = _fileSaver.SaveFile(model.JobRequirement, Request.RequestContext);
 
@@ -91,6 +93,17 @@ namespace inSpark.Controllers
             jobModel.DatePublished = DateTime.Now;
             _jobRepo.CreateItem(jobModel);
             return RedirectToAction("GetJobs");
+        }
+
+        private void UpdateJob (JobFormViewModel model)
+        {
+            Job job = Mapper.Map<Job>(model);
+            job.Id = new Guid(model.Id);
+            string fileStoragePath = _fileSaver.SaveFile(model.JobRequirement, Request.RequestContext);
+            job.AcceptanceMailMessage = model.AcceptanceMailMessage.Trim();
+            job.RejectionMailMessage = job.RejectionMailMessage.Trim();
+            job.JobRequirementPath = fileStoragePath;
+            _jobRepo.UpdateItem(job);
         }
 
         public ActionResult Job (Guid jobId)
@@ -176,9 +189,10 @@ namespace inSpark.Controllers
 
             else
             {
-                //Admin wants to update job details
-                JobFormViewModel model = Mapper.Map<Job, JobFormViewModel>(_jobRepo.ReadItem(id));
-                return RedirectToAction("CreateJob", new { model });
+                var job = _jobRepo.ReadItem(id);
+                JobFormViewModel model = Mapper.Map<Job, JobFormViewModel>(job);
+                model.Id = job.Id.ToString();
+                return View ("JobForm",model );
             }
            
         }

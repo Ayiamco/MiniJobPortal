@@ -21,28 +21,30 @@ namespace inSpark.Dtos
 
     public class JobFormViewModel
     {
+        public string Id { get; set; }
+
         [Required]
         [StringLength(100)]
         [Display(Name = "Job Title *")]
         public string Title { get; set; }
 
-        [Required]
+        [Required (ErrorMessage ="DeadLine is required")]
         [MustBeFutureDate]
-        [Display(Name = "Application DeadLine (mm/dd/yyyy) *")]
+        [Display(Name = "DeadLine (mm/dd/yyyy)")]
         public DateTime DeadLine { get; set; }
 
         //[Required]
         public HttpPostedFileBase JobRequirement { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Salutation is required")]
         [Display(Name = "Mail Salutation (E.g Dear, Hi, Hello)")]
         public string MailSalutation { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Rejection mail is required")]
         [Display(Name = "Rejection Mail Message.")]
         public string RejectionMailMessage { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Acceptance mail is required")]
         [Display(Name = "Acceptance Mail Message.")]
         public string AcceptanceMailMessage { get; set; }
     }

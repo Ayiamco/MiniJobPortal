@@ -25,7 +25,7 @@ namespace inSpark.Infrastructure.Services
 
             var email = new SendGridMessage()
             {
-                From = new EmailAddress("tochukwuchinedu21@gmail.com", user),
+                From = new EmailAddress(WebConfigurationManager.AppSettings["userEmail"], user),
                 Subject = messageSubject,
                 PlainTextContent = messageBody,
                 HtmlContent = messageBody

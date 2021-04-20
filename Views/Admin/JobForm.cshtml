@@ -1,71 +1,160 @@
 ﻿@model inSpark.Dtos.JobFormViewModel
-
+@using inSpark.Infrastructure.Services
 @{
-    ViewBag.Title = "New Job";
-    string date=Model == null ? "" : Model.DeadLine.ToString("d");
+    Layout = null;
+    string date = Model == null ? "" : Model.DeadLine.ToString("d");
     string btnText = date == "" ? "Create New" : "Update";
-    string rejectionMessage = Model == null ? "" : Model.RejectionMailMessage;
-    string acceptanceMessage=Model == null ? "" : Model.AcceptanceMailMessage;
-    
+    string rejectionMessage = Model.RejectionMailMessage == null ? "" : Model.RejectionMailMessage.Trim();
+    string acceptanceMessage = Model.AcceptanceMailMessage == null ? "" : Model.AcceptanceMailMessage.Trim();
+
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> New Job Posting </title>
 
-<h2 class="text-center" style="margin-bottom : 30px">@btnText Job Position</h2>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/index.css")
+    @Styles.Render("~/Content/css/general.css")
+    <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="~/Content/js/index.js" defer></script>
 
-@using (Html.BeginForm("SaveJob", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+</head>
+<body>
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-5">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+    <div class="pg-container">
+        <header id="top">
+            <div id="mobile-nav">
+                <figure class="logo-container">
+                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                </figure>
+                <i id="show-nav" class="fas fa-bars  "></i>
+                <i id="hide-nav" class="fas fa-times-circle  "></i>
+            </div>
+            <nav>
+                <a href="@Url.Action("Index","Home")" class="nav-link">About Us</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Services</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Our Approach</a>
+                <a href="@Url.Action("Index","Home")" class="nav-link">Contact Us</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    if (User.IsInRole(UserRoles.CanAddJobs))
+                    {
+                        <a href="@Url.Action("GetJobs","Admin")" class="link-hide">View applications</a>
+                        <a href="@Url.Action("LogOff","Account")" class="link-hide">Logoff</a>
+                    }
+                }
+            </nav>
+        </header>
+
+        <div class="page-body">
+            <div class="form-section">
+                <h2 class="text-center" >@btnText Job Position</h2>
+
+                @using (Html.BeginForm("SaveJob", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x=> x.Id);
+                <div class="form-con">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="jobform-row">
+                        <div class="jobform-group">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="jobform-group">
+                            @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "" })
+                            <div class="">
+                                <input type="datetime" value="@date" name="DeadLine" class="form-control" />
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.DeadLine, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="jobform-row">
+                        <div class="jobform-group">
+                            <label class="" name="JobRequirements">Upload Job Requirement</label>
+                            <div class="">
+                                <input type="file" class="form-control" id="jobfile-upload" name="JobRequirement" accept="application/pdf, .pdf" required />
+                            </div>
+                        </div>
+                        <div class="jobform-group">
+                            @Html.LabelFor(model => model.MailSalutation, htmlAttributes: new { @class = "" })
+                            <div class="">
+                                @Html.EditorFor(model => model.MailSalutation, new { htmlAttributes = new { @class = "" } })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.MailSalutation, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="jobform-row">
+                        <div class="jobform-group">
+                            @Html.LabelFor(model => model.AcceptanceMailMessage, htmlAttributes: new { @class = "" })
+                            <div class="">
+                                <textarea style="resize:none" class="form-control" rows="5" name="AcceptanceMailMessage" required>@acceptanceMessage</textarea>
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.AcceptanceMailMessage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jobform-group">
+                            @Html.LabelFor(model => model.RejectionMailMessage, htmlAttributes: new { @class = "" })
+                            <div class="">
+                                <textarea style="resize:none" class="form-control" rows="5" name="RejectionMailMessage" required>@rejectionMessage</textarea>
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.RejectionMailMessage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jobform-btn ">
+                        <button type="submit" class="btn-primary btn">@btnText Job</button>
+                    </div>
+                </div>
+                    
+                }
+            </div>
+
         </div>
+        <footer>
+            <div class="ft-left">
+                <a href="">Terms & Conditions</a>
+                <a href="">Privacy policy</a>
+            </div>
+            <div class="ft-center"><p>&copy inSpark 2020</p></div>
+            <div class="ft-right">
+                <a href=""><img src="~/Content/images/facebook.svg"></a>
+                <a href=""><img src="~/Content/images/Instagram.svg"></a>
+                <a href=""><img src="~/Content/images/LinkedIn.svg"></a>
+                <a href=""><img src="~/Content/images/Twitter.svg"></a>
+            </div>
+        </footer>
+
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DeadLine, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-5">
-            <input type="datetime" value="@date" name="DeadLine" class="form-control" />
-            @Html.ValidationMessageFor(model => model.DeadLine, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-5" name="JobRequirements">Upload Job Requirement</label>
-        <div class="col-md-5">
-            <input type="file" name="JobRequirement" accept="application/pdf, .pdf" required />
-        </div>
-    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MailSalutation, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-5">
-            @Html.EditorFor(model => model.MailSalutation, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MailSalutation, "", new { @class = "text-danger" })
-        </div>
-    </div>
+</body>
+</html>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AcceptanceMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-5">
-            <textarea style="resize:none" class="form-control input-lg" rows="5" name="AcceptanceMailMessage" required>
-            </textarea>
-            @Html.ValidationMessageFor(model => model.AcceptanceMailMessage, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.RejectionMailMessage, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-5">
-            <textarea style="resize:none" class="form-control input-lg" rows="5" name="RejectionMailMessage" required>
-            </textarea>
-            @Html.ValidationMessageFor(model => model.RejectionMailMessage, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <button type="submit"  class="btn btn-primary">@btnText Job</button>
 
-</div>
-}
 
 

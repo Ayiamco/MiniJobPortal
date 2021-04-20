@@ -1,2 +1,106 @@
-﻿body {
+﻿.div-centered{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+
+.self-centered {
+    display: grid !important;
+    justify-content: center !important;
+}
+
+/*Form Job form styles*/
+.jobform-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    margin: 1em 0em;
+}
+
+.jobform-group input, .jobform-group textarea {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px #EEE9E9;
+    outline: none;
+    border: 0.5px solid #EEE9E9;
+    padding-left:1em;
+    margin:0;
+}
+
+.jobform-group input{
+    height:2.5em;
+}
+
+#jobfile-upload{
+    padding-top:0.5em;
+}
+
+.job-btn{
+    width:100%
+}
+
+.form-con{
+    margin:auto;
+}
+
+@media only screen and (min-width: 700px){
+    .form-section {
+        width: 550px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+        -webkit-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+        -moz-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+        padding: 1em;
+        margin-bottom: 2em;
+        margin-top:2em;
+        height:540px;
+    }
+    .jobform-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.2em;
+    }
+
+    .jobform-group{
+        justify-content:flex-start;
+        height:80px;
+    }
+
+    .jobform-btn {
+        margin: auto;
+        margin-top: 6em;
+        display:flex;
+        justify-content:center;
+    }
+    .jobform-group input, .jobform-group textarea {
+        width:230px;
+        margin-bottom:0.5em;
+    }
+}
+
+/*@media only screen and (min-width:800px) {
+    .form-section {
+        width: 70vw
+    }
+    .jobform-group input, .jobform-group textarea {
+        width: 20vw;
+        margin-bottom: 0.5em;
+    }
+}
+@media only screen and (min-width:900px){
+    .form-section{
+        width:50vw
+    }
+    
+}
+
+@media only screen and (min-width:1200px) {
+    .form-section {
+        width: 45vw
+    }
+}*/
+
