@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using System.Web.Configuration;
 
 namespace inSpark.Infrastructure
 {
@@ -29,14 +30,14 @@ namespace inSpark.Infrastructure
             UserManager.Create(
                 new ApplicationUser
                 {
-                    FullName = "Joseph Achonu",
-                    Email = "josephachonu@gmail.com",
-                    Address="10 my house address",
-                    UserName="josephachonu@gmail.com",
-                    DateOfBirth= Convert.ToDateTime("04/04/1990")
+                    FullName = "Admin Admin",
+                    Email = WebConfigurationManager.AppSettings["adminEmail"],
+                    Address = "local host address",
+                    UserName ="Admin",
+                    DateOfBirth = Convert.ToDateTime("04/04/1990")
 
-                },"Joseph123@");
-            var admin=Context.Users.Where(x => x.Email == "josephachonu@gmail.com")?.SingleOrDefault();
+                }, WebConfigurationManager.AppSettings["adminPassword"]); ;
+            var admin=Context.Users.Where(x => x.Email == WebConfigurationManager.AppSettings["adminEmail"])?.SingleOrDefault();
             UserManager.AddToRole(admin.Id, UserRoles.CanAddJobs);
         }
     }

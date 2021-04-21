@@ -6,4 +6,4 @@ bin/
 *.user
 packages
 aspnet-inSpark.mdf
-*.ldf
+aspnet-inSpark_log.ldf
