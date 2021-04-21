@@ -1,7 +1,9 @@
 FileStorage/
-ApiKeys.Config
+app.config
 obj/
 bin/
 *.suo
 *.user
 packages
+aspnet-inSpark.mdf
+*.ldf

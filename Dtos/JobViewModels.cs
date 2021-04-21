@@ -49,15 +49,7 @@ namespace inSpark.Dtos
         public string AcceptanceMailMessage { get; set; }
     }
 
-    public class UpdateJobViewModel: JobFormViewModel
-    {
-        [Required]
-        public Guid Id { get; set; }
-
-        [Required]
-        [Display(Name = "Application DeadLine (mm/dd/yyyy) *")]
-        public new DateTime DeadLine { get; set; }
-    }
+   
 
     public class JobApplicationStatusViewModel
     {

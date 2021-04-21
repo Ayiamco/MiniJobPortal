@@ -14,5 +14,6 @@ namespace inSpark.Interfaces
         Job ReadItem(Guid JobId);
         void UpdateItem(Job job);
         void UpdateNoOfApplicantsCount(Guid jobId);
+        Job ReadItemWithNavProps(Guid JobId);
     }
 }

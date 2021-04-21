@@ -120,60 +120,21 @@ namespace inSpark.Controllers
         }
 
         //GET: /Admin/GetApplicants?jobId
-        public ActionResult GetApplicants(Guid jobId,int? i, string filterParam,string searchParam )
+        public ActionResult GetApplicants(GetApplicationsViewModel model)
         {
             
-            var model = new ApplicantsViewModel() { Job = _jobRepo.ReadItem(jobId) };
-            if ( !String.IsNullOrEmpty(searchParam)  &&  String.IsNullOrEmpty(filterParam))
+            var vmodel = new ApplicantsViewModel() { Job = _jobRepo.ReadItemWithNavProps(model.JobId) };
+            if ( !string.IsNullOrEmpty(model.ApplicantsName)  || !string.IsNullOrEmpty(model.ApplicationStatus))
             {
-                var applicants = _applicationsRepo.GetApplications(jobId)
-                                                       .Where(x=> x.User.FullName.Contains(searchParam))
-                                                       .ToList();
-                ViewBag.SearchParam = searchParam;
-                ViewBag.FilterParam = "Choose Filter";
-                model.AllApplicants = applicants;
-                model.ApplicantsInPage = model.AllApplicants.ToPagedList(i ?? 1, 5);
+                var applicants = vmodel.Job.Applications.Where(x=>  
+                    x.User.FullName.ToLower().Contains(model.ApplicantsName) ||
+                    x.ApplicationStatus ==model.ApplicationStatus
+                    ).ToList();
+                vmodel.Job.Applications = applicants;
+                vmodel.ApplicationStatus = model.ApplicationStatus;
+                vmodel.ApplicantsName = model.ApplicantsName;
             }
-            else if (String.IsNullOrEmpty(searchParam) && !String.IsNullOrEmpty(filterParam))
-            {
-                var applicants = _applicationsRepo.GetApplications(jobId)
-                    .Where(x=>x.ApplicationStatus==filterParam)
-                    .ToList();
-                ViewBag.SearchParam = "";
-                ViewBag.FilterParam = filterParam;
-
-                model.AllApplicants = applicants;
-                model.ApplicantsInPage = model.AllApplicants.ToPagedList(i ?? 1, 5);
-            }
-            else if (!String.IsNullOrEmpty(searchParam) && !String.IsNullOrEmpty(filterParam))
-            {
-                var applicants = _applicationsRepo.GetApplications(jobId)
-                   .Where(x => x.ApplicationStatus == filterParam && x.User.FullName.Contains(searchParam))
-                   .ToList();
-                model.AllApplicants = applicants;
-                model.ApplicantsInPage = model.AllApplicants.ToPagedList(i ?? 1, 5);
-                ViewBag.SearchParam = searchParam;
-                ViewBag.FilterParam = filterParam;
-            }
-            else
-            {
-                var applicants_ = _applicationsRepo.GetApplications(jobId).ToList();
-                model.AllApplicants = applicants_;
-                model.ApplicantsInPage = model.AllApplicants.ToPagedList(i ?? 1, 5);
-                ViewBag.SearchParam = "";
-                ViewBag.FilterParam = "Choose Filter";
-
-            }
-
-            if (ViewBag.FilterParam == "Choose Filter")
-                ViewBag.FilterParamSearch = "";
-            else
-                ViewBag.FilterParamSearch = ViewBag.FilterParam;
-
-
-            return View("JobApplicantsList", model);
-
-
+            return View("JobApplicantsList",vmodel);
         }
 
         //GET: /Admin/UpdateJob?id=id

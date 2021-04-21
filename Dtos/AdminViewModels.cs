@@ -9,10 +9,20 @@ using PagedList.Mvc;
 
 namespace inSpark.Dtos
 {
+    public class GetApplicationsViewModel
+    {
+        //Guid jobIdint? i, string filterParam,string searchParam
+        public int Page { get; set; }
+        public Guid JobId { get; set; }
+        public string  ApplicantsName { get; set; }
+        public string ApplicationStatus { get; set; }
+    }
     public class ApplicantsViewModel
     {
         public Job Job { get; set; }
-        public IPagedList<Application> ApplicantsInPage { get; set; }
+        public int Page  { get; set; }
+        public string ApplicantsName { get; set; }
+        public string ApplicationStatus { get; set; }
 
         public IEnumerable<Application> AllApplicants { get; set; }
 

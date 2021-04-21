@@ -31,6 +31,8 @@ namespace inSpark.Models.Entities
         public DateTime DatePublished { get; set; }
         public int NoOfApplicants { get; set; }
 
+        public ICollection<Application> Applications { get; set; }
+
         [Required]
         public string JobRequirementPath { get; set; }
 

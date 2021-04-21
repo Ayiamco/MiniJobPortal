@@ -5,6 +5,7 @@ using inSpark.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 
 namespace inSpark.Repository
@@ -27,6 +28,11 @@ namespace inSpark.Repository
         public Job ReadItem(Guid JobId)
         {
             return _context.Jobs.Find(JobId);
+        }
+
+        public Job ReadItemWithNavProps(Guid JobId)
+        {
+            return _context.Jobs.Include(x=> x.Applications.Select(w=> w.User)).Where(x=> x.Id==JobId).SingleOrDefault();
         }
 
         public void UpdateItem(Job job)

@@ -2,8 +2,8 @@
 @using inSpark.Infrastructure.Services
 @{
     Layout = null;
-    string date = Model == null ? "" : Model.DeadLine.ToString("d");
-    string btnText = date == "" ? "Create New" : "Update";
+    string btnText = String.IsNullOrWhiteSpace(Model.Id) ? "Create New" : "Update";
+    string date =  btnText== "Create New" ? "" : Model.DeadLine.ToString("d");
     string rejectionMessage = Model.RejectionMailMessage == null ? "" : Model.RejectionMailMessage.Trim();
     string acceptanceMessage = Model.AcceptanceMailMessage == null ? "" : Model.AcceptanceMailMessage.Trim();
 

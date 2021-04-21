@@ -44,7 +44,20 @@
     margin:auto;
 }
 
-@media only screen and (min-width: 700px){
+/* Job list page sytles*/
+.joblist-con{
+    margin:2em;
+}
+.joblist-link{
+    display:flex;
+    justify-content:space-evenly;
+}
+
+.table-overflow {
+    width: 100%;
+    overflow: auto !important;
+}
+@media only screen and (min-width: 700px) {
     .form-section {
         width: 550px;
         margin: auto;

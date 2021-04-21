@@ -42,9 +42,15 @@ img {
     object-fit: contain;
 }
 
-.page-body{
-    min-height: calc(100vh - 180px)
-}
+/*.page-body {
+    min-height: calc(100vh - 165px);
+    margin: 0;
+    padding: 0;
+    background-color: #F4F5F8;
+    margin: 0;
+    padding: 0;
+}*/
+
 @keyframes showItem {
     from {
         opacity: 0;
@@ -64,6 +70,7 @@ img {
     left: 0;
     right: 0;
     z-index: 1000;
+    margin:0;
 }
 
 header i {

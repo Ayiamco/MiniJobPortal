@@ -3,7 +3,12 @@
 .admin-aside, .admin-main-header {
     display: none;
 }
-
+.admin-page-con::before, .admin-page-con ::after{
+    display:none;
+}
+.admin-main {
+    background-color: rgb(248,248,255);
+}
 
 .admin-info{
     display:flex;
@@ -19,8 +24,8 @@
     margin-bottom:3em;
 }
 .admin-info-card {
-    background-color: rgb(248,248,255);
     border-radius: 10px;
+    background-color:white;
     box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);
     -webkit-box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);
     -moz-box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);
@@ -88,9 +93,10 @@
         .admin-aside-content div a:hover {
             color: gray;
         }
-        .admin-main {
-            width: 80%;
-        }
+    .admin-main {
+        width: 80%;
+        background-color: rgb(248,248,255);
+    }
 
     .admin-stats-section {
         display: flex;

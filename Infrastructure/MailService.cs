@@ -18,6 +18,7 @@ namespace inSpark.Infrastructure.Services
     {
         public static async Task SendEmailAsync(string destination,  string messageBody, string messageSubject)
         {
+            var keys = WebConfigurationManager.AppSettings;
             var apiKey = WebConfigurationManager.AppSettings["apiKey"];
             var user = WebConfigurationManager.AppSettings["user"];
 

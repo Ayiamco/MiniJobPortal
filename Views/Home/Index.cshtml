@@ -1,197 +1,258 @@
-﻿
-@{
-    ViewBag.Title = "inSpark";
-}
+﻿@using inSpark.Infrastructure.Services
+@{ Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home </title>
 
-    <!-- main section  -->
-    <section id="main">
-        <aside class="main-bd">
-            <h1 class="main-title">We spark up <br> your business...</h1>
-            <p>
-                Inspark Enterprise is a full-service
-                digital agency specializing in digital
-                consulting, web design & development,
-                application design & development,
-                and digital marketing.
-            </p>
-            <span class="btn-blue"><span>Request a Quote</span></span>
-        </aside>
-        <figure class="main-hero">
-            <img src="~/Content/images/illustration-hero.svg" alt="">
-        </figure>
-    </section>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css/index.css")
+    @Styles.Render("~/Content/css/career.css")
+    @Styles.Render("~/Content/css/careerSmallScreen.css")
+    @Styles.Render("~/Content/css/applicantDetails.css")
+    @Styles.Render("~/Content/css/JobApplicantsList.css")
+    @Styles.Render("~/Content/css/adminDashboard.css")
+    @Styles.Render("~/Content/css/login.css")
+    <script src="https://kit.fontawesome.com/6ab026fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="~/Content/js/index.js" defer></script>
 
-    <!-- services section -->
-    <section id="services">
-        <h2 class="title">Our Services</h2>
-        <div class="services-container">
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
+</head>
+<body>
+    <div class="pg-container">
+        <header id="top">
+            <div id="mobile-nav">
+                <figure class="logo-container">
+                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
                 </figure>
-                <h3>
-                    Corporate Branding
-                </h3>
-                <p>
-                    We’ll discover, define, and direct your brand
-                    communications to capture and captivate your audience across digital,
-                    and print.
-                </p>
+                <i id="show-nav" class="fas fa-bars  "></i>
+                <i id="hide-nav" class="fas fa-times-circle  "></i>
             </div>
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
+            <nav>
+                <a href="#why" class="nav-link">About Us</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#approach" class="nav-link">Our Approach</a>
+                <a href="#contact" class="nav-link">Contact Us</a>
+                @Html.ActionLink("Jobs", "Index", "Jobs", null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    if (User.IsInRole(UserRoles.CanAddJobs))
+                    {
+                        <a href="@Url.Action("GetJobs","Admin")" class="link-hide">View applications</a>
+                        <a href="@Url.Action("LogOff","Account")" class="link-hide">Logoff</a>
+                    }
+                }
+            </nav>
+        </header>
+        <div class="page-body">
+            <!-- main section  -->
+            <section id="main">
+                <aside class="main-bd">
+                    <h1 class="main-title">We spark up <br> your business...</h1>
+                    <p>
+                        Inspark Enterprise is a full-service
+                        digital agency specializing in digital
+                        consulting, web design & development,
+                        application design & development,
+                        and digital marketing.
+                    </p>
+                    <span class="btn-blue"><span>Request a Quote</span></span>
+                </aside>
+                <figure class="main-hero">
+                    <img src="~/Content/images/illustration-hero.svg" alt="">
                 </figure>
-                <h3>
-                    Graphics Design
-                </h3>
-                <p>
-                    We integrate our creativity, expertise and your idea,
-                    to bring results that speak of brand consistency,
-                    and fresh design that will set your company apart.
-                    Our designs amplify your brand personality, streng
-                </p>
-            </div>
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
-                </figure>
-                <h3>
-                    Web Development
-                </h3>
-                <p>
-                    We design and build websites to impact sales,
-                    influence advocacy, and increase lead generation.
-                    Our team of designers is skilled at creating landing
-                </p>
-            </div>
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
-                </figure>
-                <h3>
-                    Mobile App Development
-                </h3>
-                <p>
+            </section>
 
-                    We work to deliver solutions for an array of business needs,
-                    we provide app development services for all kinds of users,
-                    operating systems, and platforms.
-                </p>
-            </div>
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
-                </figure>
-                <h3>
-                    Social Media Management
-                </h3>
-                <p>
-                    We make brands more likable and profitable via social media.
-                    Instills the same vibe and personality people experience at your company across the
-                </p>
-            </div>
-            <div class="service">
-                <figure>
-                    <img src="~/Content/images/home.svg" alt="">
-                </figure>
-                <h3>
-                    Custom Software Development
-                </h3>
-                <p>
-                    We thrive at helping companies prioritize the most
-                    pressing problems to work on and then build custom software to support them.
-                </p>
-            </div>
-        </div>
-    </section>
+            <!-- services section -->
+            <section id="services">
+                <h2 class="title">Our Services</h2>
+                <div class="services-container">
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Corporate Branding
+                        </h3>
+                        <p>
+                            We’ll discover, define, and direct your brand
+                            communications to capture and captivate your audience across digital,
+                            and print.
+                        </p>
+                    </div>
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Graphics Design
+                        </h3>
+                        <p>
+                            We integrate our creativity, expertise and your idea,
+                            to bring results that speak of brand consistency,
+                            and fresh design that will set your company apart.
+                            Our designs amplify your brand personality, streng
+                        </p>
+                    </div>
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Web Development
+                        </h3>
+                        <p>
+                            We design and build websites to impact sales,
+                            influence advocacy, and increase lead generation.
+                            Our team of designers is skilled at creating landing
+                        </p>
+                    </div>
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Mobile App Development
+                        </h3>
+                        <p>
 
-    <!--approach section  -->
-    <section id="approach" class="">
-        <figure id="approach-img">
-            <img src="~/Content/images/approach.jpg" alt="">
-        </figure>
-        <div id="approach-bd">
-            <h2 class="title">Our Approach</h2>
-            <p>
-                We’re a professional in-house team of designers,
-                developers, marketers, and strategists.
-                Our drive is to help you do better business through the right digital medium.
-            </p>
-        </div>
-    </section>
-
-    <!--  -->
-    <section id="why">
-        <aside class="why-bd">
-            <h2>Why Work With Us?</h2>
-            <p>
-                We’re a business full of creative, talented individuals who work together
-                as a team to create innovative and engaging interactive experiences.
-            </p><p class="why-p2">
-                To build a society where businesses and organizations will utilize tech to provide solutions to their everyday needs.
-            </p>
-        </aside>
-        <figure class="why-img">
-            <img src="~/Content/images/why.svg" alt="">
-        </figure>
-    </section>
-
-    <!--  -->
-    <section id="clients">
-        <aside class="clients-bd">
-            <h2>
-                Our Past Clients Can Speak For Us
-            </h2>
-            <p>
-                We bring a human touch to your solution, whether,
-                digital marketing, web development, custom software development,
-                no matter what technology you need.
-            </p>
-        </aside>
-        <figure>
-            <img src="~/Content/images/clients.svg" alt="">
-        </figure>
-    </section>
-
-    <!--  -->
-    <section id="contact">
-        <div class="contact-form">
-            <form action="">
-                <h2>We love to hear from you</h2>
-                <input type="text" placeholder="Fullname">
-                <input type="text" placeholder="Phone Number">
-                <input type="email" placeholder="Enter Email Address">
-                <textarea placeholder="Message"></textarea>
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        <div class="contact-info-container">
-            <figure>
-                <div>
-                    <img src="~/Content/images/location.svg" alt="" id="img-special">
+                            We work to deliver solutions for an array of business needs,
+                            we provide app development services for all kinds of users,
+                            operating systems, and platforms.
+                        </p>
+                    </div>
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Social Media Management
+                        </h3>
+                        <p>
+                            We make brands more likable and profitable via social media.
+                            Instills the same vibe and personality people experience at your company across the
+                        </p>
+                    </div>
+                    <div class="service">
+                        <figure>
+                            <img src="~/Content/images/home.svg" alt="">
+                        </figure>
+                        <h3>
+                            Custom Software Development
+                        </h3>
+                        <p>
+                            We thrive at helping companies prioritize the most
+                            pressing problems to work on and then build custom software to support them.
+                        </p>
+                    </div>
                 </div>
-                <figcaption> KM 7 Port Harcourt - Enugu Expressway, Ugwuaji, Enugu</figcaption>
-            </figure>
-            <figure>
-                <div>
-                    <img src="~/Content/images/time.svg" alt="">
+            </section>
+
+            <!--approach section  -->
+            <section id="approach" class="">
+                <figure id="approach-img">
+                    <img src="~/Content/images/approach.jpg" alt="">
+                </figure>
+                <div id="approach-bd">
+                    <h2 class="title">Our Approach</h2>
+                    <p>
+                        We’re a professional in-house team of designers,
+                        developers, marketers, and strategists.
+                        Our drive is to help you do better business through the right digital medium.
+                    </p>
                 </div>
-                <figcaption> Weekdays (Mon - Fri): 8am - 5pm</figcaption>
-            </figure>
-            <figure>
-                <div>
-                    <img src="~/Content/images/phone.svg" alt="">
+            </section>
+
+            <!--  -->
+            <section id="why">
+                <aside class="why-bd">
+                    <h2>Why Work With Us?</h2>
+                    <p>
+                        We’re a business full of creative, talented individuals who work together
+                        as a team to create innovative and engaging interactive experiences.
+                    </p><p class="why-p2">
+                        To build a society where businesses and organizations will utilize tech to provide solutions to their everyday needs.
+                    </p>
+                </aside>
+                <figure class="why-img">
+                    <img src="~/Content/images/why.svg" alt="">
+                </figure>
+            </section>
+
+            <!--  -->
+            <section id="clients">
+                <aside class="clients-bd">
+                    <h2>
+                        Our Past Clients Can Speak For Us
+                    </h2>
+                    <p>
+                        We bring a human touch to your solution, whether,
+                        digital marketing, web development, custom software development,
+                        no matter what technology you need.
+                    </p>
+                </aside>
+                <figure>
+                    <img src="~/Content/images/clients.svg" alt="">
+                </figure>
+            </section>
+
+            <!--  -->
+            <section id="contact">
+                <div class="contact-form">
+                    <form action="">
+                        <h2>We love to hear from you</h2>
+                        <input type="text" placeholder="Fullname">
+                        <input type="text" placeholder="Phone Number">
+                        <input type="email" placeholder="Enter Email Address">
+                        <textarea placeholder="Message"></textarea>
+                        <button type="submit">Send</button>
+                    </form>
                 </div>
-                <figcaption> (+234)-701-000-1111</figcaption>
-            </figure>
+                <div class="contact-info-container">
+                    <figure>
+                        <div>
+                            <img src="~/Content/images/location.svg" alt="" id="img-special">
+                        </div>
+                        <figcaption> KM 7 Port Harcourt - Enugu Expressway, Ugwuaji, Enugu</figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <img src="~/Content/images/time.svg" alt="">
+                        </div>
+                        <figcaption> Weekdays (Mon - Fri): 8am - 5pm</figcaption>
+                    </figure>
+                    <figure>
+                        <div>
+                            <img src="~/Content/images/phone.svg" alt="">
+                        </div>
+                        <figcaption> (+234)-701-000-1111</figcaption>
+                    </figure>
+                </div>
+            </section>
         </div>
-    </section>
+        <footer>
+            <div class="ft-left">
+                <a href="">Terms & Conditions</a>
+                <a href="">Privacy policy</a>
+            </div>
+            <div class="ft-center"><p>&copy inSpark 2020</p></div>
+            <div class="ft-right">
+                <a href=""><img src="~/Content/images/facebook.svg"></a>
+                <a href=""><img src="~/Content/images/Instagram.svg"></a>
+                <a href=""><img src="~/Content/images/LinkedIn.svg"></a>
+                <a href=""><img src="~/Content/images/Twitter.svg"></a>
+            </div>
+        </footer>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="~/Content/js/index.js"></script>
+</body>
+</html>
 
 
-
-@section scripts {
-    <script type="text/javascript" src="~/Content/js/index.js">
-
-    </script>
-}

@@ -1,19 +1,38 @@
-﻿@model inSpark.Models.ViewModels.ApplicantsViewModel
-@using PagedList.Mvc;
+﻿@model inSpark.Dtos.ApplicantsViewModel
 @{
     ViewBag.Title = @Model.Job.Title;
-    int notReviewedCount = Model.AllApplicants
+    int applicantsCount = Model.Job.Applications.Count();
+    int notReviewedCount = applicantsCount == 0 ? 0 :
+        Model.Job.Applications
         .Where(X => X.ApplicationStatus == @inSpark.Infrastructure.Services.JobApplicationResponse.NotReviewed)
         .Count();
-    int NoRejected = Model.AllApplicants
+    int NoRejected = applicantsCount == 0 ? 0 :
+        Model.Job.Applications
         .Where(X => X.ApplicationStatus == @inSpark.Infrastructure.Services.JobApplicationResponse.Rejected)
         .Count();
-    int NoAccepted = Model.AllApplicants
+    int NoAccepted = applicantsCount == 0 ? 0 :
+        Model.Job.Applications
         .Where(X => X.ApplicationStatus == @inSpark.Infrastructure.Services.JobApplicationResponse.Accepted)
         .Count();
+    int total = applicantsCount == 0 ? 0 : Model.Job.Applications.Count();
+    string displayVal = string.IsNullOrEmpty(Model.ApplicationStatus) ? "Select application status" : Model.ApplicationStatus;
+
 }
 
 <h2 class="text-center">Job: @Model.Job.Title</h2>
+
+@if (applicantsCount == 0)
+{
+    if (!string.IsNullOrEmpty(Model.ApplicationStatus) || !string.IsNullOrEmpty(Model.ApplicantsName))
+    {
+        <p class="text-danger text-center">No Applicants Matches your search.</p>
+    }
+    else
+    {
+        <p class="text-danger text-center">No Applicants For Job yet.</p>
+    }
+
+}
 
 <div class="job-info">
     <div class="job-info-card">
@@ -23,7 +42,7 @@
 
         </div>
 
-        <p id="info-card-number">@Model.AllApplicants.Count()</p>
+        <p id="info-card-number">@total</p>
     </div>
     <div class="job-info-card">
         <div class="job-info-desc">
@@ -49,7 +68,7 @@
     </div>
     <div class="job-info-card">
         <div class="job-info-desc">
-            <p>Job  DeadLine</p>
+            <p>DeadLine</p>
             <i class="far fa-calendar-alt" style="color:blue"></i>
         </div>
 
@@ -58,75 +77,40 @@
 </div>
 
 
-
-@if (@Model.AllApplicants == null)
+@if (applicantsCount != 0)
 {
-    <p class="text-danger">No Applicants For Job yet.</p>
-}
-
-@*<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/FileStorage/ProfilePictureFiles/IMG-20190103-WA0003204857639.jpg" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-</div>*@
-
-<div id="filter-section">
-    @using (Html.BeginForm("GetApplicants", "Admin", FormMethod.Get))
+    using (Html.BeginForm("GetApplicants", "Admin", null, FormMethod.Get, new { id = "filter-section" }))
     {
-        <div class="form-group ">
-            <div class="">
-                <input id="search" type="text" name="searchParam" class="form-control" placeholder="Enter Applicant Name..." value="@ViewBag.SearchParam" />
-            </div>
-            <div class="">
-                <input type="submit" value="Search By Name" class="btn btn-primary" />
-            </div>
-            <input id="searchFilterParam" name="filterParam" value="@ViewBag.FilterParamSearch" hidden />
-            <input name="jobId" value="@Model.Job.Id" hidden required />
+        <div class="">
+            <input id="applicantsName" type="text" name="applicantsName" class="form-control"
+                   placeholder="Enter Applicants Name..." value="@ViewBag.ApplicantsName" />
         </div>
+        <div class="filter-section-mid">
+            <select id="applicationStatus" class="form-control" name="applicationStatus" value="@displayVal" required>
+                <option>@displayVal</option>
+                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Rejected"> Rejected Application Only</option>
+                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Accepted"> Accepted Only</option>
+                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.NotReviewed"> Not Reviewed Only</option>
+            </select>
+        </div>
+        <input name="jobId" value="@Model.Job.Id" hidden required />
+        <input type="submit" class="btn btn-primary" value="Filter Applicants" />
     }
 
-    @using (Html.BeginForm("GetApplicants", "Admin", FormMethod.Get))
-    {
-        <div class="form-group ">
-            <div class="">
-                <select id="filter" class="form-control" name="filterParam" value="@ViewBag.FilterParam" style="margin-right: 5px" required>
-                    <option> @ViewBag.FilterParam</option>
-                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Rejected">Rejected Application Only</option>
-                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Accepted">Accepted Only</option>
-                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.NotReviewed">Not Reviewed Only</option>
-                </select>
-            </div>
-
-            <div class="">
-                <input type="submit" value="Filter Applications" class="btn btn-primary" />
-            </div>
-            <input id="filterSearchParam" name="searchParam" value="@ViewBag.SearchParam" hidden />
-            <input name="jobId" value="@Model.Job.Id" hidden required />
-        </div>
-    }
-
-
-</div>
-
-<div class="div-padded table-fullpage">
-    <table class="table table-striped table-bordered table-responsive ">
-        <tr>
-            <th>Applicant Name</th>
-            <th>Review Status</th>
-        </tr>
-        @if (Model.ApplicantsInPage != null)
-        {
-            foreach (var item in Model.ApplicantsInPage)
+    <div class="JA-list table-fullpage">
+        <h3 class="text-center">Applicants List</h3>
+        <table class="table table-striped table-bordered table-responsive ">
+            <tr>
+                <th>Applicant Name</th>
+                <th>Review Status</th>
+            </tr>
+            @foreach (var item in Model.Job.Applications)
             {
                 <tr>
                     <td>
                         @Html.ActionLink(item.User.FullName, "ViewApplicant", "Admin", new
                         {
-                            applicantId = item.UserId
-                   ,
+                            applicantId = item.UserId,
                             jobId = item.JobId
                         }, null)
                     </td>
@@ -135,24 +119,11 @@
                     </td>
                 </tr>
             }
+        </table>
+    </div>
+}
 
-        }
 
-
-    </table>
-    @if (Model.ApplicantsInPage.Count() == 0)
-    {
-        <p class="text-danger text-center"> No Applicant matches your search</p>
-    }
-    @Html.PagedListPager(Model.ApplicantsInPage, i => Url.Action("GetApplicants", "Admin",
-        new
-            {
-                jobId = @Model.Job.Id,
-                i,
-                searchParam = Request.QueryString["searchParam"],
-            filterParam = Request.QueryString["filterParam"]
-        }))
-</div>
 @section scripts {
     <script type="text/javascript" src="~/Content/js/JobApplicantsList.js">
 
