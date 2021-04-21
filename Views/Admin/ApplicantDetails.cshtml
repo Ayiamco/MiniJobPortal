@@ -1,4 +1,4 @@
-﻿@model inSpark.Models.ViewModels.ApplicantDetailsViewModel
+﻿@model inSpark.Dtos.ApplicantDetailsViewModel
 @{
     ViewBag.Title = "ApplicantDetails";
     int age;
@@ -10,34 +10,28 @@
     }
     int adminResponse1 = (int)inSpark.Infrastructure.Services.AdminApplicationResponse.Accepted;
     int adminResponse2 = (int)inSpark.Infrastructure.Services.AdminApplicationResponse.Rejected;
-
+     
 }
 
-<h1 class="text-center">Applicant Details</h1>
-
+<h2 class="text-center">Applicant Details</h2>
 <div id="applicant-details-section">
-    <div class="applicant-details">
-        <div class="applicant-details-img div-profile-img" >
-            <img src="@Model.Applicant.ProfilePicturePath" alt="Profilepicture">
-        </div>
-
-        <div>
-            <h3>Name: @Model.Applicant.FullName</h3>
-            <h3>Age: @age</h3>
-            <h3>Sex: @Model.Applicant.Gender</h3>
-            <h3>Address: @Model.Applicant.Address</h3>
-            <h3>Email: @Model.Applicant.Email</h3>
-        </div>
-
+    <figure class="applicant-details-img">
+        <img src="@Model.Applicant.ProfilePicturePath" alt="Profilepicture">
+    </figure>
+    <div class="applicant-details-info">
+        <p><span>Name: </span>@Model.Applicant.FullName</p>
+        <p><span>Age: </span> @age</p>
+        <p><span>Gender: </span> @Model.Applicant.Gender</p>
+        <p><span>Address: </span> @Model.Applicant.Address</p>
+        <p><span>Email: </span> @Model.Applicant.Email</p>
+        <p><span>Resume: </span><a href="@Model.Applicant.ResumePath" target="_blank"> View Applicant Resume</a></p>
     </div>
-    <div class="admin-response">
-
-        <a href="@Model.Applicant.ResumePath" target="_blank">View Applicant Resume</a>
-        @Html.ActionLink("Accept Applicant","RespondToApplication","Admin", new { applicantId=Model.Applicant.Id, jobId=Model.JobId, adminResponse= adminResponse1 },null)
-        @Html.ActionLink("Reject Applicant","RespondToApplication","Admin", new { applicantId = Model.Applicant.Id, jobId = Model.JobId, adminResponse = adminResponse2 },htmlAttributes:new { id = "decline-applicant" })
-        
-   
-
-    </div>
+</div>
+<div class="admin-response">
+    @Html.ActionLink("Accept Applicant", "RespondToApplication", 
+        "Admin", new { applicantId = Model.Applicant.Id, jobId = Model.JobId, adminResponse = adminResponse1 }, null)
+    @Html.ActionLink("Reject Applicant", "RespondToApplication", 
+     "Admin", new { applicantId = Model.Applicant.Id, jobId = Model.JobId, adminResponse = adminResponse2 }, 
+        htmlAttributes: new { id = "decline-applicant" })
 </div>
 

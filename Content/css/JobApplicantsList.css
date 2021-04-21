@@ -56,7 +56,7 @@
     align-items:center;
 }
 
-#filter-section input, #filter-section select, #filter-section button {
+#filter-section input, #filter-section select{
     width: 70vw;
     margin:0.2em;
     box-sizing:border-box;

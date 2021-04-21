@@ -46,7 +46,7 @@ namespace inSpark.Controllers
                     AdminMail = User.Identity.Name,
                     NoOfAcceptedApplications = applications
                         .Where(x => x.ApplicationStatus == JobApplicationResponse.Accepted).Count(),
-                    NoOfApplicants = _applicationsRepo.GetAllApplicants().Count(),
+                    NoOfApplicants = _applicationsRepo.GetAllApplicants().Count() - 1,
                     NoOfNotReviewedApplications = applications
                         .Where(x => x.ApplicationStatus == JobApplicationResponse.NotReviewed).Count(),
                     NoOfJobs = _jobRepo.GetActiveJobs().Count(),
