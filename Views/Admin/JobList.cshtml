@@ -1,6 +1,4 @@
-﻿@model IPagedList<inSpark.Models.Entities.Job>
-@using PagedList;
-@using PagedList.Mvc; 
+﻿@model inSpark.Dtos.PagedData<inSpark.Models.Entities.Job>
 @{
     ViewBag.Title = "JobList";
 }
@@ -10,60 +8,75 @@
     <h2 class="text-center">JobList</h2>
 
     <div class="joblist-link">
-         @Html.ActionLink("Add New Job", "CreateJob", "Admin", null, null, null, new { }, htmlAttributes: new { id = "btn-addNewJob", @class = "btn-primary" })
-         @Html.ActionLink("Admin Dashboard", "Index", "Admin", null, null, null, new { }, htmlAttributes: new { id = "btn-addNewJob", @class = "btn-primary" })
+        @Html.ActionLink("Add New Job", "CreateJob", "Admin", null, null, null, new { }, htmlAttributes: new { id = "btn-addNewJob", @class = "" })
+        @Html.ActionLink("Admin Dashboard", "Index", "Admin", null, null, null, new { }, htmlAttributes: new { id = "btn-addNewJob", @class = "" })
     </div>
-
-    <div class="table-overflow">
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>S/N</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().DatePublished)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().DeadLine)
-                </th>
-                <th>
-                    No of Applicants
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-            @{
-                int count = 1;
-                foreach (var item in Model)
-                {
+    @{
+        if (Model.Data.Count() == 0)
+        {
+            <p class="text-center text-danger m-top">Your are yet to add the first job posting.</p>
+        }
+        else
+        {
+            <div class="table-overflow m-top">
+                <table class="table table-bordered table-striped">
                     <tr>
-                        <td>@count</td>
-                        <td>
-                            @Html.ActionLink(@item.Title, "Job", "Admin", null, null, null, new { jobId = @item.Id }, null)
-                        </td>
-                        <td>
-                            @item.DatePublished.ToString("D")
-                        </td>
-                        <td>
-                            @item.DeadLine.ToString("D")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NoOfApplicants)
-                        </td>
-                        <td>
-                            @Html.ActionLink("View Applicants", "GetApplicants", "Admin", null, null, null, new { jobId = item.Id }, null)
-                        </td>
-                        <td>
-                            @Html.ActionLink("End Application", "UpdateJob", "Admin", null, null, null, new { id = item.Id, property = "DeadLine" }, null)
-                        </td>
+                        <th>S/N</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Data.First().Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Data.First().DatePublished)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Data.First().DeadLine)
+                        </th>
+                        <th>
+                            No of Applicants
+                        </th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                    count++;
-                }
-            }
+                    @{
+                        int count = 1;
+                        foreach (var item in @Model.Data)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td>
+                                    @Html.ActionLink(@item.Title, "Job", "Admin", null, null, null, new { jobId = @item.Id }, null)
+                                </td>
+                                <td>
+                                    @item.DatePublished.ToString("D")
+                                </td>
+                                <td>
+                                    @item.DeadLine.ToString("D")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoOfApplicants)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("View Applicants", "GetApplicants", "Admin", null, null, null, new { jobId = item.Id }, null)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("End Application", "UpdateJob", "Admin", null, null, null, new { id = item.Id, property = "DeadLine" }, null)
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
 
 
-        </table>
+                </table>
 
-    </div>
+            </div>
+        }
+    }
+
+    @if (Model.HasMoreData)
+    {
+        <a href="@Url.Action("","", new { currentPage =Model.CurrentPage})" class="joblist-btn">Load more...</a>
+    }
+
+    
 </div>

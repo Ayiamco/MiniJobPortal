@@ -1,5 +1,6 @@
 ﻿
 /* admin aside styles*/
+
 .admin-aside, .admin-main-header {
     display: none;
 }
@@ -68,7 +69,7 @@
         flex-direction: column;
         width: 20%;
         background-color: var(--blue-1);
-        min-height:calc(100vh - 180px)
+        min-height: var(--page-body-height-ls);
     }
     .admin-aside-content{
         padding-top:2.5em

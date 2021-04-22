@@ -200,6 +200,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Dtos\PagedData.cs" />
     <Compile Include="Infrastructure\CreateStorgeDirectory.cs" />
     <Compile Include="Infrastructure\SeedAdmin.cs" />
     <Compile Include="Infrastructure\SeedRoles.cs" />
