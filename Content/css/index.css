@@ -4,6 +4,9 @@
     --gray-1: #fafafa;
     --gray-2: #d3d4d9;
     --blue-2: rgb(2, 2, 37);
+    --page-body-height-ss: calc(100vh - 280px);
+    --page-body-height-ls: calc(100vh - 165px);
+    
 }
 
 html {
@@ -15,18 +18,16 @@ html {
     margin: 0em;
     box-sizing: border-box;
 }
-
-body{
-    padding:0;
+h1,h2,h3,h4,h5,h6,p,body{
     margin:0;
+    padding:0;
 }
 
-h1 {
+h1,h2 {
     font-family: "fira sans";
 }
 
 h2 {
-    font-family: "fira sans";
     color: var(--blue-1);
     font-size: 2em;
     text-align: center;
@@ -38,18 +39,18 @@ a{
 
 img {
     width: 100%;
-    height: 100%
+    height: 100%;
     object-fit: contain;
 }
 
-/*.page-body {
-    min-height: calc(100vh - 165px);
+.page-body {
+    min-height: var(--page-body-height-ss) ;
     margin: 0;
     padding: 0;
-    background-color: #F4F5F8;
+    background-color: rgb(248,248,255);
     margin: 0;
     padding: 0;
-}*/
+}
 
 @keyframes showItem {
     from {
@@ -372,6 +373,10 @@ footer {
 }
 
 @media only screen and (min-width: 500px) {
+
+    .page-body {
+        min-height: var(--page-body-height-ls);
+    }
     /* nav bar styles */
     .logo-container {
         width: 20%;

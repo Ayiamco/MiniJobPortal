@@ -37,6 +37,7 @@ namespace inSpark.Controllers
         // GET: /Admin
         public ActionResult Index(int? i)
         {
+            var keys=HttpContext.Application.AllKeys;
 
             if (User.IsInRole(UserRoles.CanAddJobs))
             {
