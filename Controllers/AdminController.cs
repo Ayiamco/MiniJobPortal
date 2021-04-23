@@ -114,18 +114,17 @@ namespace inSpark.Controllers
         }
 
         //GET: Admin/GetJobs
-        public ActionResult GetJobs(int? currentPage)
+        public ActionResult GetJobs(int currentPage=0)
         {
+            if (currentPage == 0) return RedirectToAction(nameof(GetJobs), new { currentPage = 1 });
             const int PageSize = 2;
             var joblist = _jobRepo.GetActiveJobs().ToList();
-           var _currentPage = currentPage ?? 0;
-            var joblist_new=joblist.Skip(_currentPage * PageSize).Take(PageSize).ToList();
-
+            var joblist_new=joblist.Skip((currentPage-1) * PageSize).Take(PageSize).ToList();
             var model = new PagedData<Job>
             {
                 Data = joblist_new,
-                CurrentPage = _currentPage + 1,
-                HasMoreData = joblist.Count() > (_currentPage+1) * PageSize
+                CurrentPage = currentPage +1,
+                HasMoreData = joblist.Count() > currentPage * PageSize
             };
             return View("JobList", model);
         }

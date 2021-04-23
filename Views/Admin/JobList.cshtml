@@ -75,7 +75,7 @@
 
     @if (Model.HasMoreData)
     {
-        <a href="@Url.Action("","", new { currentPage =Model.CurrentPage})" class="joblist-btn">Load more...</a>
+        <a href="@Url.Action("GetJobs","Admin", new { currentPage =Model.CurrentPage})" class="joblist-btn">Load more...</a>
     }
 
     
