@@ -127,6 +127,7 @@ nav {
 /* main section styles */
 #main {
     padding: 1px 1em;
+    padding-top:2em;
 }
 
 #main figure {

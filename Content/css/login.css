@@ -7,7 +7,7 @@
     width:80vw;
 }
 .login-form-con {
-    min-height: var(--page-body-height);
+    min-height: var(--page-body-height-ss);
     display: flex;
     flex-direction: column;
     justify-content:center;

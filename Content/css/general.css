@@ -59,11 +59,15 @@
     margin:auto;
 }
 
+
 /* Job list page sytles*/
-.joblist-con{
-    margin:2em;
-    padding:1.5em;
-    margin-top:0;
+.job-con-a{
+    padding:2em ;
+}
+.joblist-con {
+    margin: 2em;
+    padding: 1.5em;
+    margin-top: 0;
 }
 .joblist-link{
     display:flex;
@@ -87,21 +91,44 @@
    text-align:center;
 }
 
-    .joblist-btn:hover{
-        color:gray;
+.joblist-btn:hover{
+    color:gray;
+}
+
+/*Reapply page styles*/
+.jr-con {
+    min-height: var(--page-body-height-ss);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    padding:2em;
+}
+
+.jr-con h2{
+    margin-bottom:0.5em;
+}
+.jr div a{
+   display:inline-block;
+   margin:0.5em;
+}
+@media only screen and (min-width: 700px) {
+    .JA-list{
+        background-color:white;
+        width:50vw;
+        margin:auto;
     }
-    @media only screen and (min-width: 700px) {
-        .form-section {
-        width: 550px;
-        margin: auto;
-        border-radius: 10px;
-        box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
-        -webkit-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
-        -moz-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
-        padding: 1em;
-        margin-bottom: 2em;
-        margin-top:2em;
-        height:540px;
+    /*.form-section {
+    width: 550px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+    -webkit-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+    -moz-box-shadow: -1px -1px 14px 0px rgba(141,127,127,0.75);
+    padding: 1em;
+    margin-bottom: 2em;
+    margin-top:2em;
+    height:540px;
     }
     .jobform-row {
         display: flex;
@@ -125,28 +152,28 @@
     .jobform-group input, .jobform-group textarea {
         width:230px;
         margin-bottom:0.5em;
-    }
+    }*/
 }
 
 /*@media only screen and (min-width:800px) {
-    .form-section {
-        width: 70vw
-    }
-    .jobform-group input, .jobform-group textarea {
-        width: 20vw;
-        margin-bottom: 0.5em;
-    }
+.form-section {
+    width: 70vw
+}
+.jobform-group input, .jobform-group textarea {
+    width: 20vw;
+    margin-bottom: 0.5em;
+}
 }
 @media only screen and (min-width:900px){
-    .form-section{
-        width:50vw
-    }
+.form-section{
+    width:50vw
+}
     
 }
 
 @media only screen and (min-width:1200px) {
-    .form-section {
-        width: 45vw
-    }
+.form-section {
+    width: 45vw
+}
 }*/
 

@@ -29,7 +29,19 @@
         <header id="top">
             <div id="mobile-nav">
                 <figure class="logo-container">
-                    <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                    @{
+                        if (!User.IsInRole(UserRoles.CanAddJobs))
+                        {
+                            <a href="@Url.Action("Index","Home")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Admin")" id="logo"><img src="~/Content/images/logo.png" alt=""></a>
+                        }
+                    }
+
+
+
                 </figure>
                 <i id="show-nav" class="fas fa-bars  "></i>
                 <i id="hide-nav" class="fas fa-times-circle  "></i>

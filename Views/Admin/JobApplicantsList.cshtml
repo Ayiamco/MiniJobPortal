@@ -19,109 +19,112 @@
 
 }
 
-<h2 class="text-center p-top">Job: @Model.Job.Title</h2>
+<div class="job-con-a">
+    <h2 class="text-center">Job: @Model.Job.Title</h2>
 
-@if (applicantsCount == 0)
-{
-    if (!string.IsNullOrEmpty(Model.ApplicationStatus) || !string.IsNullOrEmpty(Model.ApplicantsName))
+    @if (applicantsCount == 0)
     {
-        <p class="text-danger text-center">No Applicants Matches your search.</p>
-    }
-    else
-    {
-        <p class="text-danger text-center">No Applicants For Job yet.</p>
-    }
+        if (!string.IsNullOrEmpty(Model.ApplicationStatus) || !string.IsNullOrEmpty(Model.ApplicantsName))
+        {
+            <p class="text-danger text-center">No Applicants Matches your search.</p>
+        }
+        else
+        {
+            <p class="text-danger text-center">No Applicants For Job yet.</p>
+        }
 
-}
-
-<div class="job-info">
-    <div class="job-info-card">
-        <div class="job-info-desc">
-            <p>Total</p>
-            <i class="fas fa-users " style="color:blue"></i>
-
-        </div>
-
-        <p id="info-card-number">@total</p>
-    </div>
-    <div class="job-info-card">
-        <div class="job-info-desc">
-            <p>Approved </p>
-            <i class="fas fa-check " style="color:blue"></i>
-
-        </div>
-        <p id="info-card-number">@NoAccepted</p>
-    </div>
-    <div class="job-info-card">
-        <div class="job-info-desc">
-            <p>Declined </p>
-            <i class="fas fa-times" style="color: rgb(172, 34, 34)"></i>
-        </div>
-        <p id="info-card-number">@NoRejected</p>
-    </div>
-    <div class="job-info-card">
-        <div class="job-info-desc">
-            <p>Not Reviewed</p>
-            <i class="fas fa-user-clock" style="color:blue"></i>
-        </div>
-        <p id="info-card-number">@notReviewedCount</p>
-    </div>
-    <div class="job-info-card">
-        <div class="job-info-desc">
-            <p>DeadLine</p>
-            <i class="far fa-calendar-alt" style="color:blue"></i>
-        </div>
-
-        <p id="info-card-number">@Model.Job.DeadLine.ToString("d") </p>
-    </div>
-</div>
-
-
-@if (applicantsCount != 0)
-{
-    using (Html.BeginForm("GetApplicants", "Admin", null, FormMethod.Get, new { id = "filter-section" }))
-    {
-        <div class="">
-            <input id="applicantsName" type="text" name="applicantsName" class="form-control"
-                   placeholder="Enter Applicants Name..." value="@ViewBag.ApplicantsName" />
-        </div>
-        <div class="filter-section-mid">
-            <select id="applicationStatus" class="form-control" name="applicationStatus" value="@displayVal" required>
-                <option>@displayVal</option>
-                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Rejected"> Rejected Application Only</option>
-                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Accepted"> Accepted Only</option>
-                <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.NotReviewed"> Not Reviewed Only</option>
-            </select>
-        </div>
-        <input name="jobId" value="@Model.Job.Id" hidden required />
-        <input type="submit" class="btn btn-primary" value="Filter Applicants" />
     }
 
-    <div class="JA-list table-fullpage">
-        <h3 class="text-center">Applicants List</h3>
-        <table class="table table-striped table-bordered table-responsive ">
-            <tr>
-                <th>Applicant Name</th>
-                <th>Review Status</th>
-            </tr>
-            @foreach (var item in Model.Job.Applications)
-            {
+    <div class="job-info">
+        <div class="job-info-card">
+            <div class="job-info-desc">
+                <p>Total</p>
+                <i class="fas fa-users " style="color:blue"></i>
+
+            </div>
+
+            <p id="info-card-number">@total</p>
+        </div>
+        <div class="job-info-card">
+            <div class="job-info-desc">
+                <p>Approved </p>
+                <i class="fas fa-check " style="color:blue"></i>
+
+            </div>
+            <p id="info-card-number">@NoAccepted</p>
+        </div>
+        <div class="job-info-card">
+            <div class="job-info-desc">
+                <p>Declined </p>
+                <i class="fas fa-times" style="color: rgb(172, 34, 34)"></i>
+            </div>
+            <p id="info-card-number">@NoRejected</p>
+        </div>
+        <div class="job-info-card">
+            <div class="job-info-desc">
+                <p>Not Reviewed</p>
+                <i class="fas fa-user-clock" style="color:blue"></i>
+            </div>
+            <p id="info-card-number">@notReviewedCount</p>
+        </div>
+        <div class="job-info-card">
+            <div class="job-info-desc">
+                <p>DeadLine</p>
+                <i class="far fa-calendar-alt" style="color:blue"></i>
+            </div>
+
+            <p id="info-card-number">@Model.Job.DeadLine.ToString("d") </p>
+        </div>
+    </div>
+
+
+    @if (applicantsCount != 0)
+    {
+        using (Html.BeginForm("GetApplicants", "Admin", null, FormMethod.Get, new { id = "filter-section" }))
+        {
+            <div class="">
+                <input id="applicantsName" type="text" name="applicantsName" class="form-control"
+                       placeholder="Enter Applicants Name..." value="@ViewBag.ApplicantsName" />
+            </div>
+            <div class="filter-section-mid">
+                <select id="applicationStatus" class="form-control" name="applicationStatus" value="@displayVal" required>
+                    <option>@displayVal</option>
+                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Rejected"> Rejected Application Only</option>
+                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.Accepted"> Accepted Only</option>
+                    <option value="@inSpark.Infrastructure.Services.JobApplicationResponse.NotReviewed"> Not Reviewed Only</option>
+                </select>
+            </div>
+            <input name="jobId" value="@Model.Job.Id" hidden required />
+            <input type="submit" class="btn btn-primary" value="Filter Applicants" />
+        }
+
+        <div class="JA-list table-fullpage">
+            <h3 class="text-center">Applicants List</h3>
+            <table class="table table-striped table-bordered table-responsive ">
                 <tr>
-                    <td>
-                        @Html.ActionLink(item.User.FullName, "ViewApplicant", "Admin", new
-                        {
-                            applicantId = item.UserId,
-                            jobId = item.JobId
-                        }, null)
-                    </td>
-                    <td>
-                        @item.ApplicationStatus
-                    </td>
+                    <th>Applicant Name</th>
+                    <th>Review Status</th>
                 </tr>
-            }
-        </table>
-    </div>
-}
+                @foreach (var item in Model.Job.Applications)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.User.FullName, "ViewApplicant", "Admin", new
+                            {
+                                applicantId = item.UserId,
+                                jobId = item.JobId
+                            }, null)
+                        </td>
+                        <td>
+                            @item.ApplicationStatus
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+
+</div>
 
 
 @section scripts {
