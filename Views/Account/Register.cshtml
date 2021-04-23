@@ -1,107 +1,105 @@
-﻿@model inSpark.Models.RegisterViewModel
-
+﻿
+@model inSpark.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-   
-
 }
 
-<h2 class="text-center">Job Application Form</h2>
+<div class="c-form-con">
+    <div class="c-form-section">
+        <h2 class="text-center " style="margin-bottom:1em"> Applicants Registration Form</h2>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="c-form-row">
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "c-form-label" })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control  c-form-input " } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "c-form-label" })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control  c-form-input" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="c-form-row">
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "c-form-label " })
+                    <div class="c-form-group-el">
+                        <select id="cars" name="Gender" class="form-control  c-form-input" required>
+                            <option>Select Gender</option>
+                            <option value="Male">Female</option>
+                            <option value="Male">Male</option>
 
-<div id="margin-auto">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        </select>
+                    </div>
+                </div>
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "c-form-label " })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control  c-form-input" } })
+                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="c-form-row">
+                <div class="c-form-group-1">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "c-form-label " })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control  c-form-input" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="c-form-row">
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "c-form-label " })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control  c-form-input" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    {
-           @Html.AntiForgeryToken()
-
-         <div class="form-horizontal">
-             
-            <hr />
-            
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                <div class="c-form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "c-form-label " })
+                    <div class="c-form-group-el">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control  c-form-input" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="c-form-row">
+                <div class="c-form-group">
+                    <label class="c-form-label ">Upload Picture (Max size: 20kb )</label>
+                    <div class="c-form-group-el">
+                        <input type="file" name="ProfilePicture" accept="application/jpg,application/png, .jpg,.png" required />
+                    </div>
+                </div>
+                <div class="c-form-group">
+                    <label class="c-form-label ">Upload Resume</label>
+                    <div class="c-form-group-el">
+                        <input type="file" name="Resume" accept="application/pdf, .pdf" required />
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
+            <div class="c-form-btn ">
+                <button type="submit" class="btn-primary btn">Register</button>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @* @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-                    <select id="cars" name="Gender" class="form-control" required>
-                        <option>Select Gender</option>
-                        <option value="Male">Female</option>
-                        <option value="Male">Male</option>
-
-                    </select>
-                    @*@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })*@
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Upload Picture (Max size: 20kb )</label>
-                <div class="col-md-10">
-                    <input type="file" name="ProfilePicture" accept="application/jpg,application/png, .jpg,.png" required />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Upload Resume</label>
-                <div class="col-md-10">
-                    <input type="file" name="Resume" accept="application/pdf, .pdf" required />
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Apply" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+
+
+
+
+
+
 
 
 

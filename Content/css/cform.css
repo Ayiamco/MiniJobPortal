@@ -1,0 +1,49 @@
+﻿
+.c-form-group, .c-form-group-1 {
+    margin-bottom: 1em;
+}
+.c-form-section{
+    width:80vw;
+    margin:auto;
+    margin-bottom:1em;
+}
+
+.c-form-input, .c-form-label, .c-form-group-el, .c-form-btn, .c-form-btn button {
+    width: 100%;
+    max-width: 100% !important;
+}
+
+@media only screen and (min-width:750px){
+    .c-form-con{
+        padding:2em;
+    }
+    .c-form-row{
+        display:flex;
+        justify-content:space-around;
+    }
+
+    .c-form-group{
+        width:calc(50% - 4em);
+        margin:0.5em 2em;
+    }
+
+    .c-form-group-1 {
+        width: 100%;
+        margin: 0.5em 2em;
+    }
+
+    .c-form-section {
+        width: 60vw;
+        border-radius: 10px;
+        margin-bottom: 2em;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        background-color: white;
+        box-shadow: -4px 3px 23px -15px rgba(0,0,0,0.75);
+    }
+
+    .c-form-btn {
+        width: calc(100% - 4em);
+        margin:1em 2em;
+    }
+}
